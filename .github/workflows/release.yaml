@@ -1,0 +1,25 @@
+name: release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - v*.*.*
+
+jobs:
+  main:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          install_url: https://releases.nixos.org/nix/nix-2.35.1/install
+          extra_nix_config: experimental-features = nix-command flakes
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: nix profile add nixpkgs#devbox
+
+      - run: devbox install
+
+      - run: devbox run -- just crossbuild
