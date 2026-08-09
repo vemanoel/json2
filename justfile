@@ -1,4 +1,4 @@
-build os arch:
+crossbuild:
     GOOS=linux GOARCH=amd64 go build -o linux-amd64
     GOOS=linux GOARCH=386 go build -o linux-386
 
