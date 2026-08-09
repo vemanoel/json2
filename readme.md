@@ -1,6 +1,6 @@
-### Development
+## Development
 
-#### Environment Setup (WSL, Linux, macOS)
+### Environment Setup (WSL, Linux, macOS)
 
 1. Uninstall Nix
 
@@ -43,13 +43,13 @@ nix --extra-experimental-features 'nix-command flakes' profile add nixpkgs#git
 5. Clone this repository
 
 ```bash
-git clone https://github.com/vemanoel/reddit-dl.git
+git clone https://github.com/vemanoel/rd.git
 ```
 
 6. Navigate to project directory
 
 ```bash
-cd reddit-dl
+cd rd
 ```
 
 7. Install required development tools
@@ -58,7 +58,7 @@ cd reddit-dl
 devbox install
 ```
 
-#### Daily Commands
+### Daily Commands
 
 ```bash
 devbox run -- just crossbuild               # build for all platforms
