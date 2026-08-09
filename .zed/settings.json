@@ -1,0 +1,10 @@
+{
+  "lsp": {
+    "gopls": {
+      "binary": {
+        "path": "devbox",
+        "arguments": ["run", "--", "gopls"]
+      }
+    }
+  }
+}
