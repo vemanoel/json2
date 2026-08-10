@@ -1,29 +1,32 @@
 ## Development
 
-### Environment Setup (WSL, Linux, macOS)
+### Environment Setup
 
 1. Uninstall Nix
 
 ```bash
-sudo rm -rf /nix
-sudo rm -rf ~root/.nix-channels
-sudo rm -rf ~root/.nix-defexpr
-sudo rm -rf ~root/.nix-profile
-sudo rm -rf /etc/nix
-sudo rm -rf /etc/profile.d/nix.sh
-sudo rm -rf /etc/tmpfiles.d/nix-daemon.conf
+sudo rm -rf /nix \
+  ~root/.nix-channels \
+  ~root/.nix-defexpr \
+  ~root/.nix-profile \
+  /etc/nix \
+  /etc/profile.d/nix.sh \
+  /etc/tmpfiles.d/nix-daemon.conf \
+  /etc/bash.bashrc.backup-before-nix
 
 for i in $(seq 1 32); do
   sudo userdel nixbld$i
 done
 sudo groupdel nixbld
 
-sudo mv /etc/bashrc.backup-before-nix /etc/bashrc
+sudo sed -i '/^# Nix$/,/^# End Nix$/d' /etc/bashrc
 ```
 
 2. Install Nix
 
 ```bash
+sudo zypper install --no-recommends --no-confirm curl tar
+curl -L https://nixos.org/nix/install | sh -s -- --daemon
 curl -L https://releases.nixos.org/nix/nix-2.35.1/install | sh -s -- --daemon
 exec bash -l
 ```
