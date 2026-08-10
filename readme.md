@@ -25,8 +25,6 @@ sudo sed -i '/^# Nix$/,/^# End Nix$/d' /etc/bashrc
 2. Install Nix
 
 ```bash
-sudo zypper install --no-recommends --no-confirm curl tar
-curl -L https://nixos.org/nix/install | sh -s -- --daemon
 curl -L https://releases.nixos.org/nix/nix-2.35.1/install | sh -s -- --daemon
 exec bash -l
 ```
