@@ -2,10 +2,10 @@
 
 ### Environment Setup
 
-1. Install Devbox
+1. Install pkgx
 
 ```bash
-curl -fsSL https://get.jetify.com/devbox | bash -s -- --force
+curl -fsS https://pkgx.sh | sh
 exec bash -l
 ```
 
@@ -24,9 +24,6 @@ echo | devbox install
 ### Daily Commands
 
 ```bash
-devbox run -- just crossbuild               # build for all platforms
-devbox run -- just build [os] [target]      # build for a specific platform
+pkgx make crossbuild               # build for all platforms
+pkgx make build [os] [target]      # build for a specific platform
 ```
-
-> [!NOTE]
-> Run `devbox shell` to avoid the `devbox run --` prefix
