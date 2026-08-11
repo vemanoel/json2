@@ -3,7 +3,7 @@
     "gopls": {
       "binary": {
         "path": "pkgx",
-        "arguments": ["+gopls@0.23.0", "gopls"]
+        "arguments": ["gopls@0.23.0"]
       }
     }
   }
