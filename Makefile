@@ -1,5 +1,7 @@
 GO := pkgx +go@1.26.0
 
+.PHONY: crossbuild
+
 crossbuild:
     GOOS=linux GOARCH=amd64 $(GO) build -o linux-amd64
     GOOS=linux GOARCH=386 $(GO) build -o linux-386
