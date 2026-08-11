@@ -1,18 +1,4 @@
 {
-  "packages": [
-    "gh@2.97.0",
-    "go@1.26.5",
-    "gopls@0.23.0",
-    "just@1.57.0"
-  ]
-}
-victor@DESKTOP-TE8PQFQ:~/test> devbox  install
-Info: Ensuring packages are installed.
-Info: Installing the following packages to the nix store: gh@2.97.0, go@1.26.5, gopls@0.23.0, just@1.57.0
-✓ Computed the Devbox environment.
-Finished installing packages.
-victor@DESKTOP-TE8PQFQ:~/test> cat devbox.lock
-{
   "lockfile_version": "1",
   "packages": {
     "gh@2.97.0": {
