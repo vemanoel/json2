@@ -9,6 +9,6 @@
 ### Commands
 
 ```bash
-pkgx make crossbuild               # build for all platforms
-pkgx make build [os] [target]      # build for a specific platform
+pkgx just crossbuild               # build for all platforms
+pkgx just build [os] [target]      # build for a specific platform
 ```
