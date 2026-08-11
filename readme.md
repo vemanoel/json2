@@ -2,7 +2,6 @@
 
 ### Prerequisites
 
-- curl
 - tar
 - gzip
 - [pkgx](https://docs.pkgx.sh/pkgx/installing-pkgx)
