@@ -1,27 +1,13 @@
 ## Development
 
-### Environment Setup
+### Prerequisites
 
-1. Install pkgx
+- curl
+- tar
+- gzip
+- [pkgx](https://docs.pkgx.sh/pkgx/installing-pkgx)
 
-```bash
-curl -fsS https://pkgx.sh | sh
-exec bash -l
-```
-
-3. Navigate to project directory
-
-```bash
-cd rd
-```
-
-4. Install required development tools
-
-```bash
-echo | devbox install
-```
-
-### Daily Commands
+### Commands
 
 ```bash
 pkgx make crossbuild               # build for all platforms
