@@ -1,6 +1,6 @@
 .ONESHELL:
 
-GO = pkgx go@1.26.0
+GO = pkgx go@1.26.5
 
 crossbuild:
 	GOOS=linux GOARCH=amd64 $(GO) build -o linux-amd64
