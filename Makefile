@@ -1,4 +1,4 @@
-GO := pkgx +go@1.26.0
+GO=pkgx +go@1.26.0
 
 .PHONY: crossbuild
 
