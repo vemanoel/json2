@@ -2,8 +2,6 @@
 
 ### Prerequisites
 
-- tar
-- gzip
 - [pkgx](https://docs.pkgx.sh/pkgx/installing-pkgx)
 
 ### Commands
