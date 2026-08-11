@@ -1,3 +1,5 @@
+.ONESHELL:
+
 GO = pkgx +go@1.26.0
 
 crossbuild:
