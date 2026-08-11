@@ -2,8 +2,8 @@
   "lsp": {
     "gopls": {
       "binary": {
-        "path": "devbox",
-        "arguments": ["run", "--", "gopls"]
+        "path": "pkgx",
+        "arguments": ["+gopls@0.23.0", "gopls"]
       }
     }
   }
