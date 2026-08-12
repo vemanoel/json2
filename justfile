@@ -7,7 +7,7 @@ start_gopls:
     pkgx +go@{{ go_version }} +gopls@{{ gopls_version }} gopls
 
 run *args:
-	pkgx +go@{{ go_version }} go run main.go {{ args }}
+	pkgx +go@{{ go_version }} go run ./main.go {{ args }}
 
 build os arch:
 	rm -rf ./build/{{ os }}-{{ arch }}
