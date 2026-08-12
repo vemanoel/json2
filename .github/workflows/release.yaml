@@ -14,12 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          fetch-depth: 0
           fetch-tags: true
 
       - uses: pkgxdev/setup@v5
 
       - run: pkgx just crossbuild
 
-      - run: gh release create "v2.0.0" build/* --title "v2.0.0" --generate-notes
+      - run: gh release create "${{ github.ref_name }}" build/* --title "${{ github.ref_name }}" --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
