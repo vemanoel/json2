@@ -21,6 +21,6 @@ jobs:
 
       - run: pkgx just crossbuild
 
-      - run: gh release create "v1.0.0" build/* --title "v1.0.0" --generate-notes
+      - run: gh release create "v2.0.0" build/* --title "v2.0.0" --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
