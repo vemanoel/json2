@@ -1,7 +1,7 @@
 gopls_version := "0.23.0"
 go_version := "1.26.5"
 
-start_lsp:
+start_gopls:
     exec pkgx +go@{{ go_version }} go +gopls@{{ gopls_version }} gopls
 
 run *args:
