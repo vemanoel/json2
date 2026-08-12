@@ -3,7 +3,6 @@ set quiet
 GO := "pkgx go@1.26.5"
 
 run *args:
-	#!/usr/bin/env bash
 	{{ GO }} run main.go {{ args }}
 
 crossbuild:
