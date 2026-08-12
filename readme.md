@@ -7,6 +7,7 @@
 ### Commands
 
 ```bash
-pkgx just crossbuild               # build for all platforms
-pkgx just build [os] [target]      # build for a specific platform
+pkgx just run [args]            # run the application
+pkgx just crossbuild            # build for all platforms
+pkgx just build [os] [target]   # build for a specific platform
 ```
