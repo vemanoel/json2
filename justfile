@@ -3,7 +3,7 @@ set quiet
 gopls_version := "0.23.0"
 go_version := "1.26.5"
 
-start_gopls:
+gopls:
     pkgx +go@{{ go_version }} +gopls@{{ gopls_version }} gopls
 
 run *args:
