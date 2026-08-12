@@ -11,11 +11,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
-  
-      - name: Install devbox
-        uses: jetify-com/devbox-install-action@v0.15.0
-        with:
-          enable-cache: 'true'
-          devbox-version: 0.17.5
 
-      - run: devbox run -- just crossbuild
+      - uses: pkgxdev/setup@v5
+
+      - run: pkgx just crossbuild
