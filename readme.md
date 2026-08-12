@@ -2,6 +2,7 @@
 
 ### Prerequisites
 
+- [Zed](https://zed.dev)
 - [pkgx](https://github.com/pkgxdev/pkgx#readme)
 
 ### Commands
