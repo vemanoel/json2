@@ -1,5 +1,5 @@
 gopls_version := "0.23.0"
-go_version := "1.26.0"
+go_version := "1.26.5"
 
 gopls:
     exec pkgx +go@{{ go_version }} go +gopls@{{ gopls_version }} gopls
