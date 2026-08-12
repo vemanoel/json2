@@ -21,6 +21,6 @@ jobs:
 
       - run: pkgx just crossbuild
 
-      - run: gh release create "${{ github.ref_name }}" build/* --title "${{ github.ref_name }}" --generate-notes
+      - run: gh release create ${{ github.ref_name }} build/* --title ${{ github.ref_name }} --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
