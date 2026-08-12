@@ -8,6 +8,7 @@
 ### Commands
 
 ```bash
+pkgx just clean                 # clean build artifacts and caches
 pkgx just run [args]            # run the application
 pkgx just crossbuild            # build for all platforms
 pkgx just build [os] [target]   # build for a specific platform
