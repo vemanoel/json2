@@ -2,8 +2,11 @@
   "lsp": {
     "gopls": {
       "binary": {
-        "path": "pkgx",
-        "arguments": ["gopls@0.23.0"]
+        "path": "sh",
+        "arguments": [
+          "-c",
+          "exec pkgx +go@1.26.5 +gopls@0.23.0 gopls"
+        ]
       }
     }
   }
