@@ -2,7 +2,7 @@
 
 ### Prerequisites
 
-- [pkgx](https://docs.pkgx.sh/pkgx/installing-pkgx)
+- [pkgx](https://github.com/pkgxdev/pkgx#readme)
 
 ### Commands
 
