@@ -11,7 +11,7 @@ run *args:
 
 build os arch:
 	rm -rf ./build/{{ os }}-{{ arch }}
-	GOOS={{ os }} GOARCH={{ arch }} pkgx +go@{{ go_version }} go build -o ./build/{{ os }}-{{ arch }}
+	GOOS={{ os }} GOARCH={{ arch }} pkgx +go@{{ go_version }} go build -o ./build/{{ os }}-{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }}
 
 crossbuild:
 	rm -rf ./crossbuild/*
