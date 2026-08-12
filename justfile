@@ -1,8 +1,10 @@
+set quiet
+
 gopls_version := "0.23.0"
 go_version := "1.26.5"
 
-start_gopls:
-    exec pkgx +go@{{ go_version }} go +gopls@{{ gopls_version }} gopls
+start_lsp:
+    pkgx +go@{{ go_version }} +gopls@{{ gopls_version }} gopls
 
 run *args:
 	pkgx +go@{{ go_version }} go run main.go {{ args }}
