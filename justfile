@@ -4,7 +4,7 @@ vGH := "2.97.0"
 vGO := "1.26.5"
 vGOPLS := "0.23.0"
 
-auth:
+setup-git:
     #!/usr/bin/env bash
 
     set -e
