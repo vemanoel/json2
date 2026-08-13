@@ -9,27 +9,25 @@ auth:
 
     set -e
 
-    echo -n "Paste your personal access token: "
-    read -s token
-    echo
-
-    echo -n "Enter your name: "
+    echo -n "enter your name: "
     read name
     echo
+    pkgx git config --local user.name $name
 
-    echo -n "Enter your github account email: "
+    echo -n "enter your github account email: "
     read email
     echo
-
-    pkgx git config --local user.name $name
     pkgx git config --local user.email $email
 
+    echo -n "paste your personal access token: "
+    read -s token
+    echo
     printf $token | pkgx gh@{{ gh_version }} auth login --with-token
-
     pkgx gh@{{ gh_version }} auth status
-
     pkgx git config --local --add credential.https://github.com.helper ""
-    pkgx git config --local --add credential.https://github.com.helper '!/home/victor/.pkgx/cli.github.com/v2.97.0/bin/gh auth git-credential'
+    pkgx git config --local --add credential.https://github.com.helper '!pkgx gh@{{ gh_version }} auth git-credential'
+    pkgx git config --local --add credential.https://gist.github.com.helper ""
+    pkgx git config --local --add credential.https://gist.github.com.helper '!pkgx gh@{{ gh_version }} auth git-credential'
 
 run *args:
 	pkgx go@{{ go_version }} run ./main.go {{ args }}
