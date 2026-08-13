@@ -46,12 +46,12 @@ release version:
 
     pkgx +git +gh@{{ gh_version }} gh run watch $run_id -i 1
 
-    status=$(pkgx +git +gh@{{ gh_version }} gh run view $run_id --json conclusion --jq '.conclusion')
+    status=$(pkgx +git +gh@{{ gh_version }} gh run view $run_id --json conclusion -q '.conclusion')
 
     if [ "$status" != "success" ]; then
         echo "release failed ($status). deleting tag $tag_name..."
         pkgx git tag -d $tag_name
-        pkgx git push origin --delete $tag_name
+        pkgx git push origin -d $tag_name
         exit 1
     fi
 
