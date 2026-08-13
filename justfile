@@ -37,7 +37,7 @@ release version:
     pkgx git tag $tag_name
     pkgx git push origin $tag_name
 
-    run_id=$(pkgx +git +gh@{{ gh_version }} gh run list --workflow=release --branch=$tag_name --limit=1 --json databaseId --jq '.[0].databaseId')
+    run_id=$(pkgx +git +gh@{{ gh_version }} gh run list --workflow=release.yaml --branch=$tag_name --limit=1 --json databaseId --jq '.[0].databaseId')
     pkgx +git +gh@{{ gh_version }} gh run watch $run_id
     status=$(pkgx +git +gh@{{ gh_version }} gh run view $run_id --json conclusion --jq '.conclusion')
 
