@@ -50,7 +50,7 @@ release version:
         [ -z "$run_id" ] && sleep 1
     done
 
-    pkgx +git +gh@{{ gh_version }} gh run watch --interval 1 "$run_id"
+    pkgx +git +gh@{{ gh_version }} gh run watch "$run_id" --interval=1
 
     status=$(pkgx +git +gh@{{ gh_version }} gh run view "$run_id" \
         --json conclusion \
