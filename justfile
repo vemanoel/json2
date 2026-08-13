@@ -40,18 +40,18 @@ release version:
     run_id=""
 
     while [ -z $run_id ]; do
-        run_id=$(pkgx +git +gh@{{ gh_version }} gh run list -w release.yaml -b $tag_name -L 1 --json databaseId -q '.[0].databaseId')
+        run_id=$(pkgx +git +gh@{{ gh_version }} gh run list --workflow release.yaml --branch $tag_name --limit 1 --json databaseId --jq '.[0].databaseId')
         [ -z $run_id ] && sleep 1
     done
 
-    pkgx +git +gh@{{ gh_version }} gh run watch $run_id -i 1
+    pkgx +git +gh@{{ gh_version }} gh run watch $run_id --interval 1
 
-    status=$(pkgx +git +gh@{{ gh_version }} gh run view $run_id --json conclusion -q '.conclusion')
+    status=$(pkgx +git +gh@{{ gh_version }} gh run view $run_id --json conclusion --jq '.conclusion')
 
     if [ "$status" != "success" ]; then
         echo "release failed ($status). deleting tag $tag_name..."
-        pkgx git tag -d $tag_name
-        pkgx git push origin -d $tag_name
+        pkgx git tag --delete $tag_name
+        pkgx git push origin --delete $tag_name
         exit 1
     fi
 
