@@ -32,19 +32,36 @@ release version:
     #!/usr/bin/env bash
     set -e
 
-    tag_name=v{{ version }}
+    tag_name="v{{ version }}"
 
-    pkgx git tag $tag_name
-    pkgx git push origin $tag_name
+    pkgx git tag "$tag_name"
+    pkgx git push origin "$tag_name"
 
-    run_id=$(pkgx +git +gh@{{ gh_version }} gh run list --workflow=release.yaml --branch=$tag_name --limit=1 --json databaseId --jq '.[0].databaseId')
-    pkgx +git +gh@{{ gh_version }} gh run watch $run_id
-    status=$(pkgx +git +gh@{{ gh_version }} gh run view $run_id --json conclusion --jq '.conclusion')
+    run_id=""
 
-    if [ $status != "success" ]; then
+    while [ -z "$run_id" ]; do
+        run_id=$(pkgx +git +gh@{{ gh_version }} gh run list \
+            --workflow=release.yaml \
+            --branch="$tag_name" \
+            --limit=1 \
+            --json databaseId \
+            --jq '.[0].databaseId')
+
+        [ -z "$run_id" ] && sleep 1
+    done
+
+    pkgx +git +gh@{{ gh_version }} gh run watch --interval 1 "$run_id"
+
+    status=$(pkgx +git +gh@{{ gh_version }} gh run view "$run_id" \
+        --json conclusion \
+        --jq '.conclusion')
+
+    if [ "$status" != "success" ]; then
         echo "release failed ($status). deleting tag $tag_name..."
-        pkgx git tag -d $tag_name
-        pkgx git push origin --delete $tag_name
+
+        pkgx git tag -d "$tag_name"
+        pkgx git push origin --delete "$tag_name"
+
         exit 1
     fi
 
