@@ -2,8 +2,6 @@
 
 ### Prerequisites
 
-Install the following tools before proceeding:
-
 - [Zed](https://zed.dev)
 - [pkgx](https://github.com/pkgxdev/pkgx#readme)
 
@@ -27,4 +25,5 @@ pkgx just clean                 # clean build artifacts and caches
 pkgx just run [args]            # run the application
 pkgx just crossbuild            # build for all platforms
 pkgx just build [os] [target]   # build for a specific platform
+pkgx just release [version]     # try create and publish a new release
 ```
