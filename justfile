@@ -1,7 +1,35 @@
 set quiet
 
-gopls_version := "0.23.0"
+gh_version := "2.97.0"
 go_version := "1.26.5"
+gopls_version := "0.23.0"
+
+auth:
+    #!/usr/bin/env bash
+
+    set -e
+
+    echo -n "Paste your personal access token: "
+    read -s token
+    echo
+
+    echo -n "Enter your name: "
+    read name
+    echo
+
+    echo -n "Enter your github account email: "
+    read email
+    echo
+
+    pkgx git config --local user.name $name
+    pkgx git config --local user.email $email
+
+    printf $token | pkgx gh@{{ gh_version }} auth login --with-token
+
+    pkgx gh@{{ gh_version }} auth status
+
+    pkgx git config --local --add credential.https://github.com.helper ""
+    pkgx git config --local --add credential.https://github.com.helper '!/home/victor/.pkgx/cli.github.com/v2.97.0/bin/gh auth git-credential'
 
 run *args:
 	pkgx go@{{ go_version }} run ./main.go {{ args }}
