@@ -37,9 +37,9 @@ release version:
     pkgx git tag $tag_name
     pkgx git push origin $tag_name
 
-    run_id=$(pkgx gh@{{ gh_version }} run list --workflow=release --branch=$tag_name --limit=1 --json databaseId --jq '.[0].databaseId')
-    pkgx gh@{{ gh_version }} run watch $run_id
-    status=$(pkgx gh@{{ gh_version }} run view $run_id --json conclusion --jq '.conclusion')
+    run_id=$(pkgx +git +gh@{{ gh_version }} gh run list --workflow=release --branch=$tag_name --limit=1 --json databaseId --jq '.[0].databaseId')
+    pkgx +git +gh@{{ gh_version }} gh run watch $run_id
+    status=$(pkgx +git +gh@{{ gh_version }} gh run view $run_id --json conclusion --jq '.conclusion')
 
     if [ $status != "success" ]; then
         echo "release failed ($status). deleting tag $tag_name..."
@@ -48,18 +48,7 @@ release version:
         exit 1
     fi
 
-	echo "release $tag_name completed successfully"
-
-_release version:
-	#!/usr/bin/env bash
-	set -e
-
-	tag_name=v{{ version }}
-
-    pkgx git tag $tag_name
-    pkgx git push origin $tag_name
-
-	pkgx gh@{{ gh_version }} run watch $(pkgx gh@{{ gh_version }} run list -w release -b $tag_name -L 1 --json databaseId -q '.[0].databaseId')
+    echo "release $tag_name completed successfully"
 
 run *args:
 	pkgx go@{{ go_version }} run ./main.go {{ args }}
