@@ -29,6 +29,10 @@ auth:
     pkgx git config --local --add credential.https://gist.github.com.helper ""
     pkgx git config --local --add credential.https://gist.github.com.helper '!pkgx gh@{{ vGH }} auth git-credential'
 
+release version:
+    pkgx git tag v{{ version }}
+    pkgx git push origin v{{ version }}
+
 run *args:
 	pkgx go@{{ vGO }} run ./main.go {{ args }}
 
@@ -52,10 +56,6 @@ clean:
     rm -rf ${HOME}/go/pkg
     rm -rf ${HOME}/.config/go
     rm -rf ${HOME}/.cache/{go,gopls,go-build,goimports}
-
-release version:
-    pkgx git tag v{{ version }}
-    pkgx git push origin v{{ version }}
 
 gopls:
     pkgx +go@{{ vGO }} +gopls@{{ vGOPLS }} gopls
