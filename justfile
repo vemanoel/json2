@@ -1,12 +1,11 @@
 set quiet
 
-vGH := "2.97.0"
-vGO := "1.26.5"
-vGOPLS := "0.23.0"
+gh_version := "2.97.0"
+go_version := "1.26.5"
+gopls_version := "0.23.0"
 
 setup-git:
     #!/usr/bin/env bash
-
     set -e
 
     echo -n "enter your name: "
@@ -22,23 +21,29 @@ setup-git:
     echo -n "paste your personal access token: "
     read -s token
     echo
-    printf $token | pkgx gh@{{ vGH }} auth login --with-token
-    pkgx gh@{{ vGH }} auth status
+    printf $token | pkgx gh@{{ gh_version }} auth login --with-token
+    pkgx gh@{{ gh_version }} auth status
     pkgx git config --local --add credential.https://github.com.helper ""
-    pkgx git config --local --add credential.https://github.com.helper '!pkgx gh@{{ vGH }} auth git-credential'
+    pkgx git config --local --add credential.https://github.com.helper '!pkgx gh@{{ gh_version }} auth git-credential'
     pkgx git config --local --add credential.https://gist.github.com.helper ""
-    pkgx git config --local --add credential.https://gist.github.com.helper '!pkgx gh@{{ vGH }} auth git-credential'
+    pkgx git config --local --add credential.https://gist.github.com.helper '!pkgx gh@{{ gh_version }} auth git-credential'
 
 release version:
-    pkgx git tag v{{ version }}
-    pkgx git push origin v{{ version }}
+	#!/usr/bin/env bash
+	set -e
+
+	tag_name=v{{ version }}
+
+    pkgx git tag $tag_name
+    pkgx git push origin $tag_name
+
+	pkgx gh@{{ gh_version } run watch $(pkgx gh@{{ gh_version }} run list --workflow release --branch $tag_name --limit 1 --json databaseId --jq '.[0].databaseId')
 
 run *args:
-	pkgx go@{{ vGO }} run ./main.go {{ args }}
+	pkgx go@{{ go_version }} run ./main.go {{ args }}
 
 build os arch:
-    GOOS={{ os }} GOARCH={{ arch }} pkgx go@{{ vGO }} build \
-        -o ./build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }}
+    GOOS={{ os }} GOARCH={{ arch }} pkgx go@{{ go_version }} build -o ./build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }}
 
 crossbuild:
     pkgx just build linux amd64
@@ -58,4 +63,4 @@ clean:
     rm -rf ${HOME}/.cache/{go,gopls,go-build,goimports}
 
 gopls:
-    pkgx +go@{{ vGO }} +gopls@{{ vGOPLS }} gopls
+    pkgx +go@{{ go_version }} +gopls@{{ gopls_version }} gopls
