@@ -14,7 +14,7 @@
 5. Fork this repository
 6. Clone the forked repository
 7. Navigate to the project directory
-8. Run `pkgx just auth`
+8. Run `pkgx just setup-git`
 9. Enter your name, github account email, and paste the access token
 
 ### Commands
