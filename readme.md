@@ -2,10 +2,12 @@
 
 ### Prerequisites
 
+Install the following tools before proceeding:
+
 - [Zed](https://zed.dev)
 - [pkgx](https://github.com/pkgxdev/pkgx#readme)
 
-### Environment Setup
+### Git setup
 
 1. Access https://github.com/settings/tokens/new
 2. Enter a name and expiration date for the token
