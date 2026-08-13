@@ -3,9 +3,6 @@ set quiet
 gopls_version := "0.23.0"
 go_version := "1.26.5"
 
-gopls:
-    pkgx +go@{{ go_version }} +gopls@{{ gopls_version }} gopls
-
 run *args:
 	pkgx go@{{ go_version }} run ./main.go {{ args }}
 
@@ -23,11 +20,16 @@ crossbuild:
 
 clean:
     rm -rf ./build
-
     rm -rf ${HOME}/.pkgx
     rm -rf ${HOME}/.local/share/pkgx
     rm -rf ${HOME}/.cache/{deno,pkgx}
-
     rm -rf ${HOME}/go/pkg
     rm -rf ${HOME}/.config/go
     rm -rf ${HOME}/.cache/{go,gopls,go-build,goimports}
+
+release version:
+    pkgx git tag v{{ version }}
+	pkgx git push origin v{{ version }}
+
+gopls:
+    pkgx +go@{{ go_version }} +gopls@{{ gopls_version }} gopls
