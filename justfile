@@ -29,7 +29,7 @@ clean:
 
 release version:
     pkgx git tag v{{ version }}
-	pkgx git push origin v{{ version }}
+    pkgx git push origin v{{ version }}
 
 gopls:
     pkgx +go@{{ go_version }} +gopls@{{ gopls_version }} gopls
