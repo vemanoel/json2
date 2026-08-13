@@ -29,6 +29,28 @@ setup-git:
     pkgx git config --local --add credential.https://gist.github.com.helper '!pkgx gh@{{ gh_version }} auth git-credential'
 
 release version:
+    #!/usr/bin/env bash
+    set -e
+
+    tag_name=v{{ version }}
+
+    pkgx git tag $tag_name
+    pkgx git push origin $tag_name
+
+    run_id=$(pkgx gh@{{ gh_version }} run list --workflow=release --branch=$tag_name --limit=1 --json databaseId --jq '.[0].databaseId')
+    pkgx gh@{{ gh_version }} run watch $run_id
+    status=$(pkgx gh@{{ gh_version }} run view $run_id --json conclusion --jq '.conclusion')
+
+    if [ $status != "success" ]; then
+        echo "release failed ($status). deleting tag $tag_name..."
+        pkgx git tag -d $tag_name
+        pkgx git push origin --delete $tag_name
+        exit 1
+    fi
+
+	echo "release $tag_name completed successfully"
+
+_release version:
 	#!/usr/bin/env bash
 	set -e
 
