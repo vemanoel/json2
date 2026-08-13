@@ -1,9 +1,5 @@
 set quiet
 
-gh_version := "2.97.0"
-go_version := "1.26.5"
-gopls_version := "0.23.0"
-
 setup-git:
     #!/usr/bin/env bash
     set -e
@@ -11,65 +7,69 @@ setup-git:
     echo -n "enter your name: "
     read name
     echo
-    pkgx git config --local user.name $name
+    git config --local user.name $name
 
     echo -n "enter your github account email: "
     read email
     echo
-    pkgx git config --local user.email $email
+    git config --local user.email $email
 
     echo -n "paste your personal access token: "
     read -s token
     echo
-    printf $token | pkgx gh@{{ gh_version }} auth login --with-token
-    pkgx gh@{{ gh_version }} auth status
-    pkgx git config --local --add credential.https://github.com.helper ""
-    pkgx git config --local --add credential.https://github.com.helper '!pkgx gh@{{ gh_version }} auth git-credential'
-    pkgx git config --local --add credential.https://gist.github.com.helper ""
-    pkgx git config --local --add credential.https://gist.github.com.helper '!pkgx gh@{{ gh_version }} auth git-credential'
+    printf $token | mise exec -- gh auth login --with-token
+    mise exec -- gh auth status
 
-release version:
+    git config --local --add credential.https://github.com.helper ""
+    git config --local --add credential.https://github.com.helper '!gh auth git-credential'
+    git config --local --add credential.https://gist.github.com.helper ""
+    git config --local --add credential.https://gist.github.com.helper '!gh auth git-credential'
+
+release tag_name:
     #!/usr/bin/env bash
     set -e
 
-    tag_name=v{{ version }}
+    mise en
 
-    pkgx git tag $tag_name
-    pkgx git push origin $tag_name
+    git tag {{ tag_name }}
+    git push origin {{ tag_name }}
 
     run_id=""
 
     while [ -z $run_id ]; do
-        run_id=$(pkgx +git +gh@{{ gh_version }} gh run list --workflow release.yaml --branch $tag_name --limit 1 --json databaseId --jq '.[0].databaseId')
+        run_id=$(gh run list --workflow release.yaml --branch {{ tag_name }} --limit 1 --json databaseId --jq '.[0].databaseId')
         [ -z $run_id ] && sleep 1
     done
 
-    pkgx +git +gh@{{ gh_version }} gh run watch $run_id --interval 1
+   	gh run watch $run_id --interval 1
 
-    status=$(pkgx +git +gh@{{ gh_version }} gh run view $run_id --json conclusion --jq '.conclusion')
+    status=$(gh run view $run_id --json conclusion --jq '.conclusion')
 
     if [ $status != "success" ]; then
-        echo "release failed ($status). deleting tag $tag_name..."
-        pkgx git tag --delete $tag_name
-        pkgx git push origin --delete $tag_name
+        echo "release failed ($status). deleting tag {{ tag_name }}..."
+        git tag --delete {{ tag_name }}
+        git push origin --delete {{ tag_name }}
         exit 1
     fi
 
-    echo "release $tag_name completed successfully"
+    echo "release {{ tag_name }} completed successfully"
 
 run *args:
-	pkgx go@{{ go_version }} run ./main.go {{ args }}
+	mise exec -- go run ./main.go {{ args }}
 
 build os arch:
-    GOOS={{ os }} GOARCH={{ arch }} pkgx go@{{ go_version }} build -o ./build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }}
+    GOOS={{ os }} GOARCH={{ arch }} mise exec -- go build -o ./build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }}
 
 crossbuild:
-    pkgx just build linux amd64
-    pkgx just build linux 386
-    pkgx just build darwin amd64
-    pkgx just build darwin arm64
-    pkgx just build windows amd64
-    pkgx just build windows 386
+    #!/usr/bin/env bash
+    set -e
+    mise en
+    just build linux amd64
+    just build linux 386
+    just build darwin amd64
+    just build darwin arm64
+    just build windows amd64
+    just build windows 386
 
 clean:
     rm -rf ./build
@@ -81,4 +81,4 @@ clean:
     rm -rf ${HOME}/.cache/{go,gopls,go-build,goimports}
 
 gopls:
-    pkgx +go@{{ go_version }} +gopls@{{ gopls_version }} gopls
+    mise exec -- gopls
