@@ -7,7 +7,7 @@
 
 ### Environment Setup
 
-1. Open https://github.com/settings/tokens/new
+1. Access https://github.com/settings/tokens/new
 2. Enter a name and expiration date for the token
 3. Select the following scopes: `repo`, `read:org`, and `gist`
 4. Click **Generate token** and copy the token
