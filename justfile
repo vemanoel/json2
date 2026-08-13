@@ -48,7 +48,7 @@ release version:
 
     status=$(pkgx +git +gh@{{ gh_version }} gh run view $run_id --json conclusion --jq '.conclusion')
 
-    if [ "$status" != "success" ]; then
+    if [ $status != "success" ]; then
         echo "release failed ($status). deleting tag $tag_name..."
         pkgx git tag --delete $tag_name
         pkgx git push origin --delete $tag_name
