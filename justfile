@@ -1,11 +1,13 @@
 set quiet
 
+[windows]
 setup_git name email:
     #!powershell
     git config --local user.name {{ name }}
     git config --local user.email {{ email }}
 	git config user.name; git config user.email
 
+[windows]
 setup_github:
     #!powershell
     $token = Read-Host "paste your personal access token" -AsSecureString
@@ -17,6 +19,7 @@ setup_github:
 	git config --local --add credential.https://gist.github.com.helper ""
 	git config --local --add credential.https://gist.github.com.helper "!mise exec -- gh auth git-credential"
 
+[windows]
 release version:
     #!powershell
 	$tag = "v{{ version }}"
@@ -39,15 +42,18 @@ release version:
     }
     Write-Host "release $tag completed successfully"
 
+[windows]
 run *args:
 	#!powershell
 	mise exec -- go run main.go {{ args }}
 
+[windows]
 build os arch:
 	#!powershell
 	$env:GOOS={{ os }}; $env:GOARCH={{ arch }}
     mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }}
 
+[windows]
 crossbuild:
 	#!powershell
     mise exec -- just build linux amd64
@@ -57,7 +63,9 @@ crossbuild:
     mise exec -- just build windows amd64
     mise exec -- just build windows 386
 
+[windows]
 clean:
+	#!powershell
     rm -rf ./build
     rm -rf ${HOME}/.pkgx
     rm -rf ${HOME}/.local/share/pkgx
