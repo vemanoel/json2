@@ -9,7 +9,7 @@ setup_git name email:
 	git config user.name; git config user.email
 
 [windows]
-setup_github:
+setup_gh:
     #!powershell
     $token = Read-Host "paste your personal access token" -AsSecureString
 	$token = [System.Net.NetworkCredential]::new("", $token).Password
@@ -21,7 +21,7 @@ setup_github:
 	git config --local --add credential.https://gist.github.com.helper "!mise exec -- gh auth git-credential"
 
 [unix]
-setup_github:
+setup_gh:
     #!/usr/bin/env bash
     read -rsp "paste your personal access token: " token
     echo
