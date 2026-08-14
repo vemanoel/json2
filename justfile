@@ -17,13 +17,14 @@ setup_github:
 	git config --local --add credential.https://gist.github.com.helper ""
 	git config --local --add credential.https://gist.github.com.helper "!mise exec -- gh auth git-credential"
 
-release tag_name:
+release version:
     #!powershell
-    git tag {{ tag_name }}
-    git push origin {{ tag_name }}
+	$tag = "v{{ version }}"
+    git tag $tag
+    git push origin $tag
     $run_id = ""
     while (-not $run_id) {
-        $run_id = mise exec -- gh run list --workflow release.yaml --branch {{ tag_name }} --limit 1 --json databaseId --jq '.[0].databaseId'
+        $run_id = mise exec -- gh run list --workflow release.yaml --branch $tag --limit 1 --json databaseId --jq '.[0].databaseId'
         if (-not $run_id) {
             Start-Sleep -Seconds 1
         }
@@ -31,13 +32,12 @@ release tag_name:
     mise exec -- gh run watch $run_id --interval 1
     $status = mise exec -- gh run view $run_id --json conclusion --jq '.conclusion'
     if ($status -ne "success") {
-        Write-Host "release failed ($status)"
-		Write-Host "deleting tag {{ tag_name }}"
-        git tag --delete {{ tag_name }}
-        git push origin --delete {{ tag_name }}
+        Write-Host "release failed ($status). deleting tag $tag"
+        git tag --delete $tag
+        git push origin --delete $tag
         exit 1
     }
-    Write-Host "release {{ tag_name }} completed successfully"
+    Write-Host "release $tag completed successfully"
 
 run *args:
 	#!powershell
