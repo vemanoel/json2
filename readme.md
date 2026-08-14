@@ -2,22 +2,22 @@
 
 ### Prerequisites
 
-- [zed](https://zed.dev)
-- [git](https://git-scm.com)
-- [mise](https://mise.jdx.dev)
+- [Zed](https://zed.dev)
+- [Git](https://git-scm.com)
+- [Mise](https://mise.jdx.dev)
 
 ### Environment setup
 
-1. Fork this repository
-2. Clone the forked repository
-3. Navigate to the project directory
-4. Run `mise install`
-5. Access https://github.com/settings/tokens/new
-6. Enter a name and expiration date for the token
-7. Select the following scopes: `repo`, `read:org`, and `gist`
-8. Click **Generate token** and copy the token
-9. Run `mise exec -- just setup-git`
-10. Enter your name, github account email, and paste the access token
+1. Fork this repository and clone your fork
+2. Open the terminal and navigate to the project directory
+3. Run `mise install` to install the required tools
+4. Run `zed .; exit` to open the project in Zed
+5. Open the Zed terminal
+6. Run `just setup_git "<git_name>" <github_account_email>`
+7. Access https://github.com/settings/tokens/new
+8. Generate a token with the following scopes: `repo`, `read:org`, `gist`
+9. Copy the generated token
+10. Run `just setup_github`, paste the token and press enter
 
 ### Commands
 
