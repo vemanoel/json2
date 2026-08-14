@@ -1,74 +1,42 @@
 set quiet
 
-setup_git git_name github_account_email:
+setup_git name email:
     #!powershell
-    git config --local user.name {{ git_name }}
-    git config --local user.email {{ github_account_email }}
+    git config --local user.name {{ name }}
+    git config --local user.email {{ email }}
+	git config user.name; git config user.email
 
 setup_github:
     #!powershell
-
-    $token = Read-Host "Paste your personal access token" -AsSecureString
+    $token = Read-Host "paste your personal access token" -AsSecureString
 	$token = [System.Net.NetworkCredential]::new("", $token).Password
-
 	$token | mise exec -- gh auth login --with-token
-
 	mise exec -- gh auth status
-
-	git config --local `
-	    --add credential.https://github.com.helper ""
-	
-	git config --local `
-	    --add credential.https://github.com.helper `
-	    "!mise exec -- gh auth git-credential"
-	
-	git config --local `
-	    --add credential.https://gist.github.com.helper ""
-	
-	git config --local `
-	    --add credential.https://gist.github.com.helper `
-	    "!mise exec -- gh auth git-credential"
+	git config --local --add credential.https://github.com.helper ""
+	git config --local --add credential.https://github.com.helper "!mise exec -- gh auth git-credential"
+	git config --local --add credential.https://gist.github.com.helper ""
+	git config --local --add credential.https://gist.github.com.helper "!mise exec -- gh auth git-credential"
 
 release tag_name:
     #!powershell
-
     git tag {{ tag_name }}
     git push origin {{ tag_name }}
-
     $run_id = ""
-
     while (-not $run_id) {
-        $run_id = mise exec -- gh run list `
-            --workflow release.yaml `
-            --branch {{ tag_name }} `
-            --limit 1 `
-            --json databaseId `
-            --jq '.[0].databaseId'
-
+        $run_id = mise exec -- gh run list --workflow release.yaml --branch {{ tag_name }} --limit 1 --json databaseId --jq '.[0].databaseId'
         if (-not $run_id) {
             Start-Sleep -Seconds 1
         }
     }
-
-    mise exec -- gh run watch `
-        $run_id `
-        --interval 1
-
-    $status = mise exec -- gh run view `
-        $run_id `
-        --json conclusion `
-        --jq '.conclusion'
-
+    mise exec -- gh run watch $run_id --interval 1
+    $status = mise exec -- gh run view $run_id --json conclusion --jq '.conclusion'
     if ($status -ne "success") {
         Write-Host "release failed ($status)"
 		Write-Host "deleting tag {{ tag_name }}"
-
         git tag --delete {{ tag_name }}
         git push origin --delete {{ tag_name }}
-
         exit 1
     }
-
     Write-Host "release {{ tag_name }} completed successfully"
 
 run *args:
