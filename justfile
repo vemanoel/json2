@@ -9,8 +9,7 @@ setup_github:
     #!powershell
     $token = Read-Host "Paste your personal access token" -AsSecureString
 	$token = [System.Net.NetworkCredential]::new("", $token).Password
-	$token | mise exec -- gh auth login --with-token
-	mise exec -- gh auth status
+	$token | mise exec -- gh auth login --with-token; mise exec -- gh auth status
     git config --local --add credential.https://github.com.helper ""
     git config --local --add credential.https://github.com.helper "!mise exec -- gh auth git-credential"
     git config --local --add credential.https://gist.github.com.helper ""
