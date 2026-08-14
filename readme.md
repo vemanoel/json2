@@ -19,12 +19,12 @@
 9. Copy the generated token
 10. Run `just setup_github`, paste the token and press enter
 
-### Commands
+### Daily Commands
 
 ```bash
-just clean                 # clean build artifacts and caches
-just run [args]            # run the application
-just crossbuild            # build for all platforms
-just build [os] [target]   # build for a specific platform
-just release [version]     # try create and publish a new release
+just clean                 # Clean build artifacts and caches
+just run [args]            # Run the application
+just crossbuild            # Build for all platforms
+just build [os] [target]   # Build for a specific platform
+just release [version]     # Create and publish a new release
 ```
