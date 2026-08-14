@@ -71,36 +71,6 @@ release tag_name:
 
     Write-Host "release {{ tag_name }} completed successfully"
 
-release tag_name:
-    #!powershell
-    git tag {{ tag_name }}
-    git push origin {{ tag_name }}
-
-    $run_id = ""
-
-	while (-not $run_id) {
-		$run_id = mise exec -- gh run list --workflow release.yaml --branch {{ tag_name }} --limit 1 --json databaseId --jq '.[0].databaseId'
-	
-		if (-not $run_id) {
-			Start-Sleep -Seconds 1
-		}
-	}
-	
-	mise exec -- gh run watch $run_id --interval 1
-	
-	$status = mise exec -- gh run view $run_id --json conclusion --jq '.conclusion'
-	
-	if ($status -ne "success") {
-		Write-Host "release failed ($status). deleting tag {{ tag_name }}..."
-	
-		git tag --delete {{ tag_name }}
-		git push origin --delete {{ tag_name }}
-	
-		exit 1
-	}
-	
-	Write-Host "release {{ tag_name }} completed successfully"
-
 run *args:
 	#!powershell
 	mise exec -- go run main.go {{ args }}
