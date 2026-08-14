@@ -7,14 +7,27 @@ setup_git git_name github_account_email:
 
 setup_github:
     #!powershell
+
     $token = Read-Host "Paste your personal access token" -AsSecureString
 	$token = [System.Net.NetworkCredential]::new("", $token).Password
+
 	$token | mise exec -- gh auth login --with-token
+
 	mise exec -- gh auth status
-    git config --local --add credential.https://github.com.helper ""
-    git config --local --add credential.https://github.com.helper "!mise exec -- gh auth git-credential"
-    git config --local --add credential.https://gist.github.com.helper ""
-    git config --local --add credential.https://gist.github.com.helper "!mise exec -- gh auth git-credential"
+
+	git config --local `
+	    --add credential.https://github.com.helper ""
+	
+	git config --local `
+	    --add credential.https://github.com.helper `
+	    "!mise exec -- gh auth git-credential"
+	
+	git config --local `
+	    --add credential.https://gist.github.com.helper ""
+	
+	git config --local `
+	    --add credential.https://gist.github.com.helper `
+	    "!mise exec -- gh auth git-credential"
 
 release tag_name:
     #!powershell
@@ -24,7 +37,7 @@ release tag_name:
     $run_id = ""
 
 	while (-not $run_id) {
-		$run_id = mise exec -- gh run list -w release.yaml -b {{ tag_name }} -L 1 --json databaseId -q '.[0].databaseId'
+		$run_id = mise exec -- gh run list --workflow release.yaml --branch {{ tag_name }} --limit 1 --json databaseId --jq '.[0].databaseId'
 	
 		if (-not $run_id) {
 			Start-Sleep -Seconds 1
