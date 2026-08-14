@@ -11,10 +11,11 @@ setup_github:
 	$token = [System.Net.NetworkCredential]::new("", $token).Password
 	$token | mise exec -- gh auth login --with-token
 	mise exec -- gh auth status
+	$helper = "!mise exec -- gh auth git-credential"
     git config --local --add credential.https://github.com.helper ""
-    git config --local --add credential.https://github.com.helper '!mise exec -- gh auth git-credential'
+    git config --local --add credential.https://github.com.helper $helper
     git config --local --add credential.https://gist.github.com.helper ""
-    git config --local --add credential.https://gist.github.com.helper '!mise exec -- gh auth git-credential'
+    git config --local --add credential.https://gist.github.com.helper $helper
 
 release tag_name:
     #!powershell
