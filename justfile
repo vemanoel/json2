@@ -5,7 +5,7 @@ set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
 
 [windows]
 shell:
-    powershell.exe -NoProfile -Command "mise activate pwsh | Out-String | Invoke-Expression; pwsh"
+    powershell.exe -NoProfile -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe"
 
 [unix]
 shell:
