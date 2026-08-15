@@ -12,9 +12,9 @@
         "env": {},
         "shell": {
             "with_arguments": {
-                "title_override": "mise",
-                "program": "bash",
-                "args": ["--login", "-c", "mise en"]
+                "title_override": "Mise",
+                "program": "mise",
+                "args": ["exec", "--", "shell"]
             }
         }
     }
