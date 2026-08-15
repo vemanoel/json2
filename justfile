@@ -21,7 +21,7 @@ setup_gh:
     git config --local user.name $name
     $email = Read-Host "enter your github account email"
     git config --local user.email $email
-    $token = Read-Host "paste your personal access token" -AsSecureString
+    $token = Read-Host "paste your access token" -AsSecureString
     $token = [System.Net.NetworkCredential]::new("", $token).Password
     $token | mise exec -- gh auth login --with-token
     mise exec -- gh auth status
@@ -37,7 +37,7 @@ setup_gh:
     git config --local user.name $name
     read -rp "enter your github account email: " email
     git config --local user.email $email
-    read -rsp "paste your personal access token: " token
+    read -rsp "paste your access token: " token
     echo
     echo $token | mise exec -- gh auth login --with-token
     mise exec -- gh auth status
