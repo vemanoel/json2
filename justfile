@@ -14,15 +14,15 @@ shell:
 
 [unix]
 shell:
-    exec bash --login -c 'eval "$(mise activate bash)"; exec bash'
+    bash --login -c 'eval "$(mise activate bash)"; exec bash'
 
 [windows]
 setup_gh:
     #!powershell
-	$name = Read-Host "enter your name"
-	git config --local user.name $name
-	$email = Read-Host "enter your github account email"
-	git config --local user.email $email
+    $name = Read-Host "enter your name"
+    git config --local user.name $name
+    $email = Read-Host "enter your github account email"
+    git config --local user.email $email
     $token = Read-Host "paste your personal access token" -AsSecureString
     $token = [System.Net.NetworkCredential]::new("", $token).Password
     $token | mise exec -- gh auth login --with-token
@@ -37,13 +37,13 @@ setup_gh:
     #!/usr/bin/env bash
     read -rp "enter your name: " name
     echo
-	git config --local user.name $name
+    git config --local user.name $name
     read -rp "enter your github account email: " email
     echo
     git config --local user.name $email
     echo
-	read -rsp "paste your personal access token: " token
-	echo
+    read -rsp "paste your personal access token: " token
+    echo
     echo $token | mise exec -- gh auth login --with-token
     mise exec -- gh auth status
     git config --local --add credential.https://github.com.helper ""
@@ -120,12 +120,12 @@ crossbuild:
 clean:
     Remove-Item -LiteralPath .\build -Recurse -Force
     Remove-Item -LiteralPath $HOME\go\pkg -Recurse -Force
-	Remove-Item -LiteralPath $env:APPDATA\go -Recurse -Force
-	Remove-Item -LiteralPath $env:LOCALAPPDATA\gopls -Recurse -Force
-	Remove-Item -LiteralPath $env:LOCALAPPDATA\go-build -Recurse -Force
-	Remove-Item -LiteralPath $env:LOCALAPPDATA\goimports -Recurse -Force
-	Remove-Item -LiteralPath $HOME\.local\state\mise
-	Remove-Item -LiteralPath $env:LOCALAPPDATA\mise -Recurse -Force
+    Remove-Item -LiteralPath $env:APPDATA\go -Recurse -Force
+    Remove-Item -LiteralPath $env:LOCALAPPDATA\gopls -Recurse -Force
+    Remove-Item -LiteralPath $env:LOCALAPPDATA\go-build -Recurse -Force
+    Remove-Item -LiteralPath $env:LOCALAPPDATA\goimports -Recurse -Force
+    Remove-Item -LiteralPath $HOME\.local\state\mise
+    Remove-Item -LiteralPath $env:LOCALAPPDATA\mise -Recurse -Force
 
 [linux]
 clean:
