@@ -8,9 +8,7 @@ set shell := ["powershell.exe", "-NoLogo", "-Command"]
 
 [windows]
 shell:
-    #!powershell
-    $env:MISE_PWSH_CHPWD_WARNING=0
-    powershell.exe -NoProfile -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
+    $env:MISE_PWSH_CHPWD_WARNING=0; powershell.exe -NoProfile -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
 
 [unix]
 shell:
@@ -36,12 +34,9 @@ setup_gh:
 setup_gh:
     #!/usr/bin/env bash
     read -rp "enter your name: " name
-    echo
     git config --local user.name $name
     read -rp "enter your github account email: " email
-    echo
     git config --local user.email $email
-    echo
     read -rsp "paste your personal access token: " token
     echo
     echo $token | mise exec -- gh auth login --with-token
