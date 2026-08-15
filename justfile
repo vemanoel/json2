@@ -40,7 +40,7 @@ setup_gh:
     git config --local user.name $name
     read -rp "enter your github account email: " email
     echo
-    git config --local user.name $email
+    git config --local user.email $email
     echo
     read -rsp "paste your personal access token: " token
     echo
