@@ -17,7 +17,8 @@
 7. Access https://github.com/settings/tokens/new
 8. Generate a token with the following scopes: `repo`, `read:org`, `gist`
 9. Copy the generated token
-10. Run `just setup_gh`, paste the token and press enter
+10. Run `just setup_gh`
+11. Paste the token and press enter
 
 ### Daily Commands
 
