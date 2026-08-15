@@ -42,6 +42,8 @@ setup_gh:
     echo
     git config --local user.name $email
     echo
+	read -rsp "paste your personal access token: " token
+	echo
     echo $token | mise exec -- gh auth login --with-token
     mise exec -- gh auth status
     git config --local --add credential.https://github.com.helper ""
