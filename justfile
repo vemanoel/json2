@@ -1,11 +1,16 @@
 set quiet
 
+[unix]
 set shell := ["bash", "-c"]
-set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
+
+[windows]
+set shell := ["powershell.exe", "-NoLogo", "-Command"]
 
 [windows]
 shell:
-    powershell.exe -NoProfile -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe"
+    #!powershell
+    $env:MISE_PWSH_CHPWD_WARNING=0
+    powershell.exe -NoProfile -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
 
 [unix]
 shell:
@@ -14,22 +19,22 @@ shell:
 setup_git name email:
     git config --local user.name {{ name }}
     git config --local user.email {{ email }}
-	git config user.name; git config user.email
+    git config user.name; git config user.email
 
 [windows]
 setup_gh:
     #!powershell
     $token = Read-Host "paste your personal access token" -AsSecureString
-	$token = [System.Net.NetworkCredential]::new("", $token).Password
-	$token | mise exec -- gh auth login --with-token
-	mise exec -- gh auth status
-	git config --local --add credential.https://github.com.helper ""
-	git config --local --add credential.https://github.com.helper "!mise exec -- gh auth git-credential"
-	git config --local --add credential.https://gist.github.com.helper ""
-	git config --local --add credential.https://gist.github.com.helper "!mise exec -- gh auth git-credential"
+    $token = [System.Net.NetworkCredential]::new("", $token).Password
+    $token | mise exec -- gh auth login --with-token
+    mise exec -- gh auth status
+    git config --local --add credential.https://github.com.helper ""
+    git config --local --add credential.https://github.com.helper "!mise exec -- gh auth git-credential"
+    git config --local --add credential.https://gist.github.com.helper ""
+    git config --local --add credential.https://gist.github.com.helper "!mise exec -- gh auth git-credential"
 
-[unix]
-setup_gh:
+    [unix]
+    setup_gh:
     #!/usr/bin/env bash
     read -rsp "paste your personal access token: " token
     echo
@@ -43,7 +48,7 @@ setup_gh:
 [windows]
 release version:
     #!powershell
-	$tag = "v{{ version }}"
+    $tag = "v{{ version }}"
     git tag $tag
     git push origin $tag
     $run_id = ""
