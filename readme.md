@@ -8,15 +8,13 @@
 
 ### Environment setup
 
-1. Fork this repository and clone your fork
-2. Open the terminal and navigate to the project directory
-3. Run `mise install` to install the required tools
-4. Run `zed .; exit` to open the project in Zed
-5. Open the Zed terminal
-6. Run `just setup_git "<git_name>" <github_account_email>`
-7. Access https://github.com/settings/tokens/new
-8. Generate a token with the following scopes: `repo`, `read:org`, `gist`
-9. Copy the token, run `just setup_gh`, paste the token and press enter
+1. Clone this repository and navigate to the project directory
+2. Run `mise install`
+3. Access https://github.com/settings/tokens/new
+4. Generate a token with the following scopes: `repo`, `read:org`, `gist`
+5. Run `mise exec -- just setup_gh`
+6. Enter your name, github account email and the generated token
+7. Run `zed .; exit` to open the project in Zed
 
 ### Daily Commands
 
