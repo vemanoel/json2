@@ -1,10 +1,10 @@
 set quiet
 
-[windows]
-set shell := ["powershell.exe", "-NoLogo", "-Command"]
-
 [unix]
 set shell := ["bash", "-c"]
+
+[windows]
+set shell := ["powershell.exe", "-NoLogo", "-Command"]
 
 [windows]
 shell:
@@ -33,8 +33,8 @@ setup_gh:
     git config --local --add credential.https://gist.github.com.helper ""
     git config --local --add credential.https://gist.github.com.helper "!mise exec -- gh auth git-credential"
 
-    [unix]
-    setup_gh:
+[unix]
+setup_gh:
     #!/usr/bin/env bash
     read -rsp "paste your personal access token: " token
     echo
