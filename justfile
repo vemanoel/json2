@@ -83,17 +83,11 @@ run *args:
 
 [windows]
 build os arch:
-	#!powershell
-	$env:GOOS={{ os }}
-	$env:GOARCH={{ arch }}
-    mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }}
+	$env:GOOS={{ os }}; $env:GOARCH={{ arch }}; mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }}
 
 [unix]
 build os arch:
-	#!/usr/bin/env bash
-	export GOOS={{ os }}
-	export GOARCH={{ arch }}
-    mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }}
+    GOOS={{ os }} GOARCH={{ arch }} mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }}
 
 crossbuild:
     mise exec -- just build linux amd64
@@ -105,7 +99,6 @@ crossbuild:
 
 [linux]
 clean:
-	#!powershell
     rm -rf ./build
     rm -rf ${HOME}/.pkgx
     rm -rf ${HOME}/.local/share/pkgx
