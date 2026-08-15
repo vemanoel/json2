@@ -62,7 +62,6 @@ release version:
     mise exec -- gh run watch $run_id --interval 1
     $status = mise exec -- gh run view $run_id --json conclusion --jq '.conclusion'
     if ($status -ne "success") {
-        Write-Host "release failed ($status). deleting tag $tag"
         git tag --delete $tag
         git push origin --delete $tag
         exit 1
@@ -85,7 +84,6 @@ release version:
     mise exec -- gh run watch $run_id --interval 1
     status=$(mise exec -- gh run view $run_id --json conclusion --jq '.conclusion')
     if [ $status != "success" ]; then
-        echo "release failed ($status). deleting tag $tag"
         git tag --delete $tag
         git push origin --delete $tag
         exit 1
