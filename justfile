@@ -16,14 +16,13 @@ shell:
 shell:
     exec bash --login -c 'eval "$(mise activate bash)"; exec bash'
 
-setup_git name email:
-    git config --local user.name {{ name }}
-    git config --local user.email {{ email }}
-    git config user.name; git config user.email
-
 [windows]
 setup_gh:
     #!powershell
+	$name = Read-Host "enter your name"
+	git config --local user.name $name
+	$email = Read-Host "enter your github account email"
+	git config --local user.email $email
     $token = Read-Host "paste your personal access token" -AsSecureString
     $token = [System.Net.NetworkCredential]::new("", $token).Password
     $token | mise exec -- gh auth login --with-token
@@ -36,7 +35,12 @@ setup_gh:
 [unix]
 setup_gh:
     #!/usr/bin/env bash
-    read -rsp "paste your personal access token: " token
+    read -rp "enter your name: " name
+    echo
+	git config --local user.name $name
+    read -rp "enter your github account email: " email
+    echo
+    git config --local user.name $email
     echo
     echo $token | mise exec -- gh auth login --with-token
     mise exec -- gh auth status
