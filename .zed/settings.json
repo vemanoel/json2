@@ -1,21 +1,20 @@
 {
-  "lsp": {
-    "gopls": {
-      "binary": {
-        "path": "mise",
-        "arguments": ["exec", "--", "gopls"],
-      },
+    "lsp": {
+        "gopls": {
+            "binary": {
+                "path": "mise",
+                "arguments": ["exec", "--", "gopls"]
+            }
+        }
     },
-  },
-  "terminal": {
-    "working_directory": "current_project_directory",
-    "env": {},
-    "shell": {
-      "with_arguments": {
-        "title_override": "Mise",
-        "program": "mise",
-        "args": ["exec", "--", "just", "shell"],
-      },
-    },
-  },
+    "terminal": {
+        "working_directory": "current_project_directory",
+        "env": {},
+        "shell": {
+            "with_arguments": {
+                "program": "mise",
+                "args": ["exec", "--", "just", "shell"]
+            }
+        }
+    }
 }
