@@ -7,11 +7,11 @@ set shell := ["bash", "-c"]
 set shell := ["powershell.exe", "-NoLogo", "-Command"]
 
 [windows]
-mise_activate:
+env:
     $env:MISE_PWSH_CHPWD_WARNING=0; powershell.exe -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
 
 [unix]
-mise_activate:
+env:
     bash --login -c 'eval "$(mise activate bash)"; exec bash'
 
 [windows]
