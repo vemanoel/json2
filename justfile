@@ -3,6 +3,14 @@ set quiet
 set shell := ["bash", "-c"]
 set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
 
+[windows]
+shell:
+    powershell.exe -NoProfile -Command "mise activate pwsh | Out-String | Invoke-Expression; pwsh"
+
+[unix]
+shell:
+    exec bash --login -c 'eval "$(mise activate bash)"; exec bash'
+
 setup_git name email:
     git config --local user.name {{ name }}
     git config --local user.email {{ email }}
