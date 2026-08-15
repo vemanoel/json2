@@ -120,9 +120,11 @@ crossbuild:
 clean:
     Remove-Item -LiteralPath .\build -Recurse -Force
     Remove-Item -LiteralPath $HOME\go\pkg -Recurse -Force
+	Remove-Item -LiteralPath $env:APPDATA\go -Recurse -Force
 	Remove-Item -LiteralPath $env:LOCALAPPDATA\gopls -Recurse -Force
 	Remove-Item -LiteralPath $env:LOCALAPPDATA\go-build -Recurse -Force
 	Remove-Item -LiteralPath $env:LOCALAPPDATA\goimports -Recurse -Force
+	Remove-Item -LiteralPath $HOME\.local\state\mise
 	Remove-Item -LiteralPath $env:LOCALAPPDATA\mise -Recurse -Force
 
 [linux]
