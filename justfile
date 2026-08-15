@@ -1,10 +1,10 @@
 set quiet
 
-[unix]
-set shell := ["bash", "-c"]
-
 [windows]
 set shell := ["powershell.exe", "-NoLogo", "-Command"]
+
+[unix]
+set shell := ["bash", "-c"]
 
 [windows]
 shell:
