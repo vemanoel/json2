@@ -113,17 +113,15 @@ crossbuild:
 
 [windows]
 clean:
-    #!powershell
-    $ErrorActionPreference = "SilentlyContinue"
-    Remove-Item -LiteralPath .\build -Recurse -Force
-    Remove-Item -LiteralPath $HOME\go\pkg -Recurse -Force
-    Remove-Item -LiteralPath $env:APPDATA\go -Recurse -Force
-    Remove-Item -LiteralPath $env:LOCALAPPDATA\gopls -Recurse -Force
-    Remove-Item -LiteralPath $env:LOCALAPPDATA\go-build -Recurse -Force
-    Remove-Item -LiteralPath $env:LOCALAPPDATA\goimports -Recurse -Force
-    Remove-Item -LiteralPath $env:LOCALAPPDATA\mise -Recurse -Force
-    Remove-Item -LiteralPath $env:LOCALAPPDATA\sigstore\sigstore-rust -Recurse -Force
-    Remove-Item -LiteralPath $HOME\.local\state\mise -Recurse -Force
+    Remove-Item -LiteralPath .\build -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $HOME\go\pkg -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $env:APPDATA\go -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $env:LOCALAPPDATA\gopls -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $env:LOCALAPPDATA\go-build -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $env:LOCALAPPDATA\goimports -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $env:LOCALAPPDATA\mise -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $env:LOCALAPPDATA\sigstore\sigstore-rust -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $HOME\.local\state\mise -Recurse -Force -ErrorAction SilentlyContinue
 
 [unix]
 clean:
