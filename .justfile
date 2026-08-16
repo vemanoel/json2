@@ -109,9 +109,9 @@ check-fmt:
 check-fmt:
     #!/usr/bin/env bash
     files=$(mise exec -- gofmt -l .)
-    if [ -n "$files" ]; then
+    if [ -n $files ]; then
         echo "the following files are not formatted:"
-        echo "$files"
+        echo $files
         exit 1
     fi
 
