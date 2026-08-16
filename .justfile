@@ -15,7 +15,7 @@ env:
     bash --login -c 'eval "$(mise activate bash)"; exec bash'
 
 [windows]
-setup_gh:
+setup-gh:
     #!powershell
     $ErrorActionPreference = "Stop"
     $name = Read-Host "enter your name"
@@ -32,7 +32,7 @@ setup_gh:
     git config --local --add credential.https://gist.github.com.helper "!mise exec -- gh auth git-credential"
 
 [unix]
-setup_gh:
+setup-gh:
     #!/usr/bin/env bash
     set -e
     read -rp "enter your name: " name
@@ -94,6 +94,26 @@ release version:
 
 run *extra_args:
 	mise exec -- go run main.go {{ extra_args }}
+
+[windows]
+check-fmt:
+    #!powershell
+    $files = mise exec -- gofmt -l .
+    if ($files) {
+        Write-Host "the following files are not formatted:"
+        $files
+        exit 1
+    }
+
+[unix]
+check-fmt:
+    #!/usr/bin/env bash
+    files=$(mise exec -- gofmt -l .)
+    if [ -n "$files" ]; then
+        echo "the following files are not formatted:"
+        echo "$files"
+        exit 1
+    fi
 
 [windows]
 build os arch *extra_args:
