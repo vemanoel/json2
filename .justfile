@@ -129,9 +129,7 @@ clean:
 [linux]
 clean:
     rm -rf ./build
-    rm -rf $HOME/.pkgx
-    rm -rf $HOME/.local/share/pkgx
-    rm -rf $HOME/.cache/{deno,pkgx}
     rm -rf $HOME/go/pkg
     rm -rf $HOME/.config/go
-    rm -rf $HOME/.cache/{go,gopls,go-build,goimports}
+	rm -rf $HOME/.local/{share,state}/mise
+    rm -rf $HOME/.cache/{go,gopls,go-build,goimports,mise,sigstore-rust}
