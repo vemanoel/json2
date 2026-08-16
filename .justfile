@@ -8,7 +8,9 @@ set shell := ["bash", "-c"]
 
 [windows]
 env:
-    $env:MISE_PWSH_CHPWD_WARNING=0; powershell.exe -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
+	#!powershell
+    $env:MISE_PWSH_CHPWD_WARNING=0
+	powershell.exe -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
 
 [unix]
 env:
@@ -88,16 +90,16 @@ release version:
         exit 1
     fi
 
-run *args:
-	mise exec -- go run main.go {{ args }}
+run *extra_args:
+	mise exec -- go run main.go {{ extra_args }}
 
 [windows]
-build os arch:
-	$env:GOOS={{ os }}; $env:GOARCH={{ arch }}; mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }}
+build os arch *args:
+	$env:GOOS={{ os }}; $env:GOARCH={{ arch }}; mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }} {{ extra_args }}
 
 [unix]
-build os arch:
-    GOOS={{ os }} GOARCH={{ arch }} mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }}
+build os arch *extra_args:
+    GOOS={{ os }} GOARCH={{ arch }} mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }} {{ extra_args }}
 
 crossbuild:
     mise exec -- just build linux amd64
