@@ -96,26 +96,6 @@ run *extra_args:
 	mise exec -- go run main.go {{ extra_args }}
 
 [windows]
-check-fmt:
-    #!powershell
-    $files = mise exec -- gofmt -l .
-    if ($files) {
-        Write-Host "the following files are not formatted:"
-        $files
-        exit 1
-    }
-
-[unix]
-check-fmt:
-    #!/usr/bin/env bash
-    files=$(mise exec -- gofmt -l .)
-    if [ -n $files ]; then
-        echo "the following files are not formatted:"
-        echo $files
-        exit 1
-    fi
-
-[windows]
 build os arch *extra_args:
 	$env:GOOS={{ os }}; $env:GOARCH={{ arch }}; mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }} {{ extra_args }}
 
