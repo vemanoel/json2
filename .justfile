@@ -8,9 +8,7 @@ set shell := ["bash", "-c"]
 
 [windows]
 env:
-	#!powershell
-    $env:MISE_PWSH_CHPWD_WARNING=0
-	powershell.exe -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
+    $env:MISE_PWSH_CHPWD_WARNING=0; powershell.exe -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
 
 [unix]
 env:
@@ -19,6 +17,7 @@ env:
 [windows]
 setup_gh:
     #!powershell
+    $ErrorActionPreference = "Stop"
     $name = Read-Host "enter your name"
     git config --local user.name $name
     $email = Read-Host "enter your github account email"
@@ -35,6 +34,7 @@ setup_gh:
 [unix]
 setup_gh:
     #!/usr/bin/env bash
+    set -e
     read -rp "enter your name: " name
     git config --local user.name $name
     read -rp "enter your github account email: " email
@@ -51,6 +51,7 @@ setup_gh:
 [windows]
 release version:
     #!powershell
+    $ErrorActionPreference = "Stop"
     $tag = "v{{ version }}"
     git tag $tag
     git push origin $tag
@@ -72,6 +73,7 @@ release version:
 [unix]
 release version:
     #!/usr/bin/env bash
+    set -e
     tag="v{{ version }}"
     git tag $tag
     git push origin $tag
@@ -95,17 +97,11 @@ run *extra_args:
 
 [windows]
 build os arch *extra_args:
-	#!powershell
-	$env:GOOS={{ os }}
-	$env:GOARCH={{ arch }};
-	mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }} {{ extra_args }}
+	$env:GOOS={{ os }}; $env:GOARCH={{ arch }}; mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }} {{ extra_args }}
 
 [unix]
 build os arch *extra_args:
-	#!/usr/bin/env bash
-    export GOOS={{ os }}
-	export GOARCH={{ arch }}
-	mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }} {{ extra_args }}
+    GOOS={{ os }} GOARCH={{ arch }} mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }} {{ extra_args }}
 
 crossbuild:
     mise exec -- just build linux amd64
@@ -117,6 +113,8 @@ crossbuild:
 
 [windows]
 clean:
+    #!powershell
+    $ErrorActionPreference = "SilentlyContinue"
     Remove-Item -LiteralPath .\build -Recurse -Force
     Remove-Item -LiteralPath $HOME\go\pkg -Recurse -Force
     Remove-Item -LiteralPath $env:APPDATA\go -Recurse -Force
@@ -124,13 +122,13 @@ clean:
     Remove-Item -LiteralPath $env:LOCALAPPDATA\go-build -Recurse -Force
     Remove-Item -LiteralPath $env:LOCALAPPDATA\goimports -Recurse -Force
     Remove-Item -LiteralPath $env:LOCALAPPDATA\mise -Recurse -Force
-	Remove-Item -LiteralPath $env:LOCALAPPDATA\sigstore\sigstore-rust -Recurse -Force
-	Remove-Item -LiteralPath $HOME\.local\state\mise
+    Remove-Item -LiteralPath $env:LOCALAPPDATA\sigstore\sigstore-rust -Recurse -Force
+    Remove-Item -LiteralPath $HOME\.local\state\mise
 
-[linux]
+[unix]
 clean:
     rm -rf ./build
     rm -rf $HOME/go/pkg
     rm -rf $HOME/.config/go
-	rm -rf $HOME/.local/{share,state}/mise
+    rm -rf $HOME/.local/{share,state}/mise
     rm -rf $HOME/.cache/{go,gopls,go-build,goimports,mise,sigstore-rust}
