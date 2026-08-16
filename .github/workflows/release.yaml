@@ -23,6 +23,7 @@ jobs:
         run: just crossbuild
 
       - name: create release
-        run: gh release create ${{ github.ref_name }} build/* --title ${{ github.ref_name }} --generate-notes
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v3.0.2
+        with:
+          files: build/*
+          generate_release_notes: true
