@@ -66,7 +66,6 @@ release version:
         git push origin --delete $tag
         exit 1
     }
-    Write-Host "release $tag completed successfully"
 
 [unix]
 release version:
@@ -88,7 +87,6 @@ release version:
         git push origin --delete $tag
         exit 1
     fi
-    echo "release $tag completed successfully"
 
 run *args:
 	mise exec -- go run main.go {{ args }}
