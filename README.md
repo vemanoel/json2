@@ -8,8 +8,7 @@
 
 ### Environment setup
 
-1. Clone this repository
-2. Navigate to the project directory
+1. Clone this repository and navigate to the project directory
 3. Run `mise install`
 4. Access https://github.com/settings/tokens/new
 5. Generate a token with the following scopes: `repo`, `read:org`, `gist`
