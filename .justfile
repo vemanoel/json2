@@ -94,7 +94,7 @@ run *extra_args:
 	mise exec -- go run main.go {{ extra_args }}
 
 [windows]
-build os arch *args:
+build os arch *extra_args:
 	$env:GOOS={{ os }}; $env:GOARCH={{ arch }}; mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }} {{ extra_args }}
 
 [unix]
