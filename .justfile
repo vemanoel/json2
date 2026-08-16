@@ -123,7 +123,7 @@ clean:
     Remove-Item -LiteralPath $env:LOCALAPPDATA\goimports -Recurse -Force
     Remove-Item -LiteralPath $env:LOCALAPPDATA\mise -Recurse -Force
     Remove-Item -LiteralPath $env:LOCALAPPDATA\sigstore\sigstore-rust -Recurse -Force
-    Remove-Item -LiteralPath $HOME\.local\state\mise
+    Remove-Item -LiteralPath $HOME\.local\state\mise -Recurse -Force
 
 [unix]
 clean:
