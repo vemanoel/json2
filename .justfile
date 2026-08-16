@@ -123,8 +123,9 @@ clean:
     Remove-Item -LiteralPath $env:LOCALAPPDATA\gopls -Recurse -Force
     Remove-Item -LiteralPath $env:LOCALAPPDATA\go-build -Recurse -Force
     Remove-Item -LiteralPath $env:LOCALAPPDATA\goimports -Recurse -Force
-    Remove-Item -LiteralPath $HOME\.local\state\mise
     Remove-Item -LiteralPath $env:LOCALAPPDATA\mise -Recurse -Force
+	Remove-Item -LiteralPath $env:LOCALAPPDATA\sigstore\sigstore-rust -Recurse -Force
+	Remove-Item -LiteralPath $HOME\.local\state\mise
 
 [linux]
 clean:
