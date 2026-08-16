@@ -8,7 +8,9 @@ set shell := ["bash", "-c"]
 
 [windows]
 env:
-    $env:MISE_PWSH_CHPWD_WARNING=0; powershell.exe -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
+	#!powershell
+    $env:MISE_PWSH_CHPWD_WARNING=0
+	powershell.exe -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
 
 [unix]
 env:
@@ -93,11 +95,17 @@ run *extra_args:
 
 [windows]
 build os arch *extra_args:
-	$env:GOOS={{ os }}; $env:GOARCH={{ arch }}; mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }} {{ extra_args }}
+	#!powershell
+	$env:GOOS={{ os }}
+	$env:GOARCH={{ arch }};
+	mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }} {{ extra_args }}
 
 [unix]
 build os arch *extra_args:
-    GOOS={{ os }} GOARCH={{ arch }} mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }} {{ extra_args }}
+	#!/usr/bin/env bash
+    export GOOS={{ os }}
+	export GOARCH={{ arch }}
+	mise exec -- go build -o build/{{ os }}_{{ arch }}{{ if os == "windows" { ".exe" } else { "" } }} {{ extra_args }}
 
 crossbuild:
     mise exec -- just build linux amd64
