@@ -8,9 +8,7 @@ set shell := ["bash", "-c"]
 
 [windows]
 env:
-	#!powershell
-    $env:MISE_PWSH_CHPWD_WARNING=0
-	powershell.exe -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
+    $env:MISE_PWSH_CHPWD_WARNING=0; powershell.exe -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
 
 [unix]
 env:
