@@ -10,12 +10,12 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v7.0.1
+      - uses: actions/checkout@v7.0.0
         with:
           fetch-depth: 0
           fetch-tags: true
 
-      - uses: jdx/mise-action@v4.2.5
+      - uses: jdx/mise-action@v4.2.0
 
       - run: just crossbuild
 
