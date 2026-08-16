@@ -9,7 +9,7 @@
 ### Environment setup
 
 1. Clone this repository and navigate to the project directory
-2. Run `mise trust; mise install`
+2. Run `mise trust; mise install;`
 3. Access https://github.com/settings/tokens/new
 4. Generate a token with the following scopes: `repo`, `read:org`, `gist`
 5. Run `mise exec -- just setup_gh`
