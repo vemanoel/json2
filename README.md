@@ -15,13 +15,3 @@
 5. Run `mise exec -- just setup_gh`
 6. Enter your name, github account email and the generated token
 7. Run `zed .; exit` to open the project in Zed
-
-### Daily Commands
-
-```bash
-just clean                 # Clean build artifacts and caches
-just run [args]            # Run the application
-just crossbuild            # Build for all platforms
-just build [os] [target]   # Build for a specific platform
-just release [version]     # Create and publish a new release
-```
