@@ -1,3 +1,16 @@
+[tasks.shell]
+run = '''
+bash --login -c 'eval "$(mise activate bash)"; exec bash'
+'''
+
+run_windows = '''
+#!powershell.exe
+$env:MISE_PWSH_CHPWD_WARNING=0
+
+powershell.exe -Command `
+    "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
+'''
+
 [tasks.run]
 usage = '''
 arg "[args]..."
