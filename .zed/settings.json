@@ -13,7 +13,7 @@
         "shell": {
             "with_arguments": {
                 "program": "mise",
-                "args": ["exec", "--", "just", "env"]
+                "args": ["run", "activate"]
             }
         }
     }
