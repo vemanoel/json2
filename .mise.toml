@@ -16,32 +16,26 @@ run = '''
 #!/usr/bin/env bash
 set -eu
 
-os={{ os }}
-arch={{ arch }}
 out=build/${os}_${arch}
-args={{ args }}
 
-if [ $os = "windows" ]; then
+if [ {{ os }} = "windows" ]; then
     out+=".exe"
 fi
 
-GOOS=$os GOARCH=$arch go build -o $out $args
+GOOS={{ os }} GOARCH={{ arch }} go build -o $out {{ args }}'
 '''
 
 run_windows = '''
 #!powershell.exe
 $ErrorActionPreference = "Stop"
 
-os = {{ os }}
-arch = {{ arch }}
-out = build/${os}_${arch}
-args = {{ args }}
+out = "build/{{ os }}_{{ arch }}"
 
-if ($os -eq "windows") {
+if ({{ os }} -eq "windows") {
     $out += ".exe"
 }
 
-$env:GOOS=$os; $env:GOARCH=$arch; go build -o $out $args
+$env:GOOS={{ os }}; $env:GOARCH={{ os }}; go build -o $out {{ args }}
 '''
 
 [tasks.crossbuild]
