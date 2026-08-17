@@ -46,7 +46,7 @@ run = '''
 set -eu
 read -p "github account email: " email
 read -p "name: " name
-read -p "github token: " token
+read -rsp "github token: " token
 echo
 git config --local user.email $email
 git config --local user.name $name
