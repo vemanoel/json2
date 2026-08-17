@@ -1,9 +1,28 @@
 {
+    "semantic_tokens": "combined",
     "lsp": {
         "gopls": {
             "binary": {
                 "path": "mise",
                 "arguments": ["exec", "--", "gopls"]
+            },
+            "initialization_options": {
+                "usePlaceholders": false,
+                "staticcheck": true,
+                "semanticTokens": true,
+                "analyses": {
+                    "ST1000": false,
+                    "ST1003": false,
+                    "newexpr": false,
+                    "shift": true,
+                    "nilness": true,
+                    "useany": true,
+                    "shadow": true,
+                    "unusedparams": true,
+                    "unusedwrite": true,
+                    "unusedvariable": true,
+                    "slicesdelete": true
+                }
             }
         }
     }
