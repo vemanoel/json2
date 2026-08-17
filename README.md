@@ -2,9 +2,9 @@
 
 ### Prerequisites
 
-- [Zed](https://zed.dev)
-- [Git](https://git-scm.com)
-- [Mise](https://mise.jdx.dev)
+- [zed](https://zed.dev)
+- [git](https://git-scm.com)
+- [mise](https://mise.jdx.dev)
 
 ### Environment setup
 
