@@ -51,21 +51,3 @@ depends = [
   "build windows amd64",
   "build windows 386",
 ]
-
-[tasks.activate]
-run = '''
-#!/usr/bin/env bash
-bash --login -c '
-    eval "$(mise activate bash)"
-    exec bash
-'
-'''
-
-run_windows = '''
-#!powershell.exe
-$env:MISE_PWSH_CHPWD_WARNING=0
-powershell.exe -Command "
-    mise activate pwsh | Out-String | Invoke-Expression
-    powershell.exe -NoLogo -NoProfile
-"
-'''
