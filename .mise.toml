@@ -16,7 +16,6 @@ run = 'go vet ./...'
 usage = '''
 arg "<os>"
 arg "<arch>"
-arg "<out>"
 '''
 
 run = '''
