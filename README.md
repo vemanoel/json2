@@ -15,4 +15,3 @@
 5. Copy the generated token to clipboard
 6. Run `mise run gitconfig`
 7. Enter your GitHub account email, your name and paste the token
-8. `zed .; exit`
