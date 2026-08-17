@@ -6,7 +6,6 @@ bash --login -c 'eval "$(mise activate bash)"; exec bash'
 run_windows = '''
 #!powershell.exe
 $env:MISE_PWSH_CHPWD_WARNING=0
-
 powershell.exe -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
 '''
 
@@ -27,27 +26,25 @@ arg "[args]..."
 run = '''
 #!/usr/bin/env bash
 set -eu
-
 out=build/${usage_os}_${usage_arch}
-
 if [ $usage_os = "windows" ]; then
     out+=".exe"
 fi
-
-GOOS=$usage_os GOARCH=$usage_arch go build -o $out ${usage_args:-}
+export GOOS=$usage_os
+export GOARCH=$usage_arch
+go build -o $out ${usage_args:-}
 '''
 
 run_windows = '''
 #!powershell.exe
 $ErrorActionPreference = "Stop"
-
 $out = "build/${usage_os}_${usage_arch}"
-
 if ($usage_os -eq "windows") {
     $out += ".exe"
 }
-
-$env:GOOS=$usage_os; $env:GOARCH=$usage_arch; go build -o $out $usage_args
+$env:GOOS=$usage_os
+$env:GOARCH=$usage_arch
+go build -o $out $usage_args
 '''
 
 [tasks.crossbuild]
