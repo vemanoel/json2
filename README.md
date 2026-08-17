@@ -8,11 +8,16 @@
 
 ### Environment setup
 
-1. Clone this repository and navigate to the project directory
-2. Run `mise trust; mise install;`
-3. Run `git config --local user.name <your name>`
-4. Run `git config --local user.name <your github account email>`
-5. Access https://github.com/settings/tokens/new
-6. Generate a token with the following scopes: `repo`, `read:org`, `gist`
-7. Run `mise exec -- gh auth login --with-token` and enter your token
-8. Run `zed .; exit` to open the project in Zed
+1. `git clone https://github.com/vemanoel/rd.git`
+2. `cd rd`
+3. `mise trust`
+4. `mise install`
+5. `git config --local user.name <name>`
+6. `git config --local user.email <github account email>`
+7. Access https://github.com/settings/tokens/new and generate a token with the following scopes: `repo`, `read:org`, `gist`
+9. `mise exec -- gh auth login --with-token` and enter the token
+10. `git config --local --add credential.https://github.com.helper '""'`
+11. `git config --local --add credential.https://github.com.helper "!mise exec -- gh auth git-credential"`
+12. `git config --local --add credential.https://gist.github.com.helper '""'`
+13. `git config --local --add credential.https://gist.github.com.helper "!mise exec -- gh auth git-credential"`
+14. `zed .; exit`
