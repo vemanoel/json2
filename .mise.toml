@@ -3,7 +3,7 @@ usage = '''
 arg "[args]..."
 '''
 
-run = 'go run main.go {{ arg(name="args") }}'
+run = 'go run main.go {{ args }}'
 
 [tasks.build]
 usage = '''
@@ -16,10 +16,10 @@ run = '''
 #!/usr/bin/env bash
 set -eu
 
-os={{ arg(name="os") }}
-arch={{ arg(name="arch") }}
+os={{ os }}
+arch={{ arch }}
 out=build/${os}_${arch}
-args={{ arg(name="args") }}
+args={{ args }}
 
 if [ $os = "windows" ]; then
     out+=".exe"
@@ -32,10 +32,10 @@ run_windows = '''
 #!powershell.exe
 $ErrorActionPreference = "Stop"
 
-os = {{ arg(name="os") }}
-arch = {{ arg(name="arch") }}
+os = {{ os }}
+arch = {{ arch }}
 out = build/${os}_${arch}
-args = {{ arg(name="args") }}
+args = {{ args }}
 
 if ($os -eq "windows") {
     $out += ".exe"
