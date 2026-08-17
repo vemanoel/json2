@@ -3,7 +3,7 @@ usage = '''
 arg "[args]..."
 '''
 
-run = 'go run main.go {{ args }}'
+run = 'go run main.go $usage_args'
 
 [tasks.build]
 usage = '''
@@ -22,7 +22,7 @@ if [ $usage_os = "windows" ]; then
     out+=".exe"
 fi
 
-GOOS=$usage_os GOARCH=$usage_arch go build -o $out $usage_args
+GOOS=$usage_os GOARCH=$usage_arch go build -o $out ${usage_args:-}
 '''
 
 run_windows = '''
