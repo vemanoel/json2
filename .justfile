@@ -110,23 +110,3 @@ crossbuild:
     mise exec -- just build darwin arm64
     mise exec -- just build windows amd64
     mise exec -- just build windows 386
-
-[windows]
-clean:
-    Remove-Item -LiteralPath .\build -Recurse -Force -ErrorAction SilentlyContinue
-    Remove-Item -LiteralPath $HOME\go\pkg -Recurse -Force -ErrorAction SilentlyContinue
-    Remove-Item -LiteralPath $env:APPDATA\go -Recurse -Force -ErrorAction SilentlyContinue
-    Remove-Item -LiteralPath $env:LOCALAPPDATA\gopls -Recurse -Force -ErrorAction SilentlyContinue
-    Remove-Item -LiteralPath $env:LOCALAPPDATA\go-build -Recurse -Force -ErrorAction SilentlyContinue
-    Remove-Item -LiteralPath $env:LOCALAPPDATA\goimports -Recurse -Force -ErrorAction SilentlyContinue
-    Remove-Item -LiteralPath $env:LOCALAPPDATA\mise -Recurse -Force -ErrorAction SilentlyContinue
-    Remove-Item -LiteralPath $env:LOCALAPPDATA\sigstore\sigstore-rust -Recurse -Force -ErrorAction SilentlyContinue
-    Remove-Item -LiteralPath $HOME\.local\state\mise -Recurse -Force -ErrorAction SilentlyContinue
-
-[unix]
-clean:
-    rm -rf ./build
-    rm -rf $HOME/go/pkg
-    rm -rf $HOME/.config/go
-    rm -rf $HOME/.local/{share,state}/mise
-    rm -rf $HOME/.cache/{go,gopls,go-build,goimports,mise,sigstore-rust}
