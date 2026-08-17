@@ -1,4 +1,49 @@
 [tools]
 go = "1.26.0"
 "go:golang.org/x/tools/gopls" = "0.23.0"
-just = "1.58.0"
+
+[tasks.run]
+run = 'go run main.go {{ arg(name="args") }}'
+
+[tasks.build]
+run = '''
+#!/usr/bin/env bash
+set -eu
+
+os={{ arg(name="os") }}
+arch={{ arg(name="arch") }}
+out=build/${os}_${arch}
+args={{ arg(name="args") }}
+
+if [ $os = "windows" ]; then
+    out=${output}.exe
+fi
+
+GOOS=$os GOARCH=$arch go build -o $out $args
+'''
+
+run_windows = '''
+#!powershell.exe
+$ErrorActionPreference = "Stop"
+
+os = {{ arg(name="os") }}
+arch = {{ arg(name="arch") }}
+out = build/${os}_${arch}
+args = {{ arg(name="args") }}
+
+if ($os -eq "windows") {
+    $out += ".exe"
+}
+
+$env:GOOS=$os; $env:GOARCH=$arch; go build -o $out $args
+'''
+
+[tasks.crossbuild]
+depends = [
+    "build linux amd64",
+    "build linux 386",
+    "build darwin amd64",
+    "build darwin arm64",
+    "build windows amd64",
+    "build windows 386",
+]
