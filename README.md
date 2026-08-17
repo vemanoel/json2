@@ -15,9 +15,10 @@
 5. `git config --local user.name <name>`
 6. `git config --local user.email <github account email>`
 7. [click here](https://github.com/settings/tokens/new) and generate a token with the following scopes: repo, read:org, gist
-9. `mise exec -- gh auth login --with-token` and enter the token
-10. `git config --local --add credential.https://github.com.helper '""'`
-11. `git config --local --add credential.https://github.com.helper "!mise exec -- gh auth git-credential"`
-12. `git config --local --add credential.https://gist.github.com.helper '""'`
-13. `git config --local --add credential.https://gist.github.com.helper "!mise exec -- gh auth git-credential"`
-14. `zed .; exit`
+9. `echo $token | mise exec -- gh auth login --with-token` and enter the token
+10. mise exec -- gh auth status
+11. `git config --local --add credential.https://github.com.helper '""'`
+12. `git config --local --add credential.https://github.com.helper "!mise exec -- gh auth git-credential"`
+13. `git config --local --add credential.https://gist.github.com.helper '""'`
+14. `git config --local --add credential.https://gist.github.com.helper "!mise exec -- gh auth git-credential"`
+15. `zed .; exit`
