@@ -56,4 +56,5 @@ git config --add credential.https://github.com.helper ''
 git config --add credential.https://github.com.helper $helper
 git config --add credential.https://gist.github.com.helper ''
 git config --add credential.https://gist.github.com.helper $helper
+gh auth status
 '''
