@@ -53,8 +53,8 @@ git config --local user.name $name
 echo $token | gh auth login --with-token
 helper="!mise exec -- gh auth git-credential"
 git config --add credential.https://github.com.helper ''
-git config --add credential.https://github.com.helper $helper
+git config --add credential.https://github.com.helper "$helper"
 git config --add credential.https://gist.github.com.helper ''
-git config --add credential.https://gist.github.com.helper $helper
+git config --add credential.https://gist.github.com.helper "$helper"
 gh auth status
 '''
