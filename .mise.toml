@@ -1,4 +1,4 @@
-[tasks.shell]
+[tasks.activate]
 run = '''
 bash --login -c 'eval "$(mise activate bash)"; exec bash'
 '''
