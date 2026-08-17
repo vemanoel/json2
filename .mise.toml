@@ -16,6 +16,7 @@ run = 'go vet ./...'
 usage = '''
 arg "<os>"
 arg "<arch>"
+arg "<out>"
 '''
 
 run = '''
@@ -27,18 +28,6 @@ if [ $usage_os = "windows" ]; then
 fi
 export GOOS=$usage_os
 export GOARCH=$usage_arch
-go build -ldflags "-s -w" -o $out
-'''
-
-run_windows = '''
-#!powershell.exe
-$ErrorActionPreference = "Stop"
-$out = "build/${usage_os}_${usage_arch}"
-if ($usage_os -eq "windows") {
-    $out += ".exe"
-}
-$env:GOOS=$usage_os
-$env:GOARCH=$usage_arch
 go build -ldflags "-s -w" -o $out
 '''
 
