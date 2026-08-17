@@ -1,8 +1,12 @@
 name: release
 
 on:
-  push:
-    tags: v*.*.*
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "version"
+        type: string
+        required: true
 
 jobs:
   release:
@@ -23,7 +27,7 @@ jobs:
         run: just crossbuild
 
       - name: create release
-        uses: softprops/action-gh-release@v3.0.2
-        with:
-          files: build/*
-          generate_release_notes: true
+        run: gh release create v${{ inputs.version }} build/* --title v${{ inputs.version }} --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
