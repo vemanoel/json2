@@ -12,7 +12,7 @@ out=build/${os}_${arch}
 args={{ arg(name="args") }}
 
 if [ $os = "windows" ]; then
-    out=${output}.exe
+    out+=".exe"
 fi
 
 GOOS=$os GOARCH=$arch go build -o $out $args
