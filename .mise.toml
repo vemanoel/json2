@@ -1,7 +1,17 @@
 [tasks.run]
+usage = '''
+arg "[args]..."
+'''
+
 run = 'go run main.go {{ arg(name="args") }}'
 
 [tasks.build]
+usage = '''
+arg "<os>"
+arg "<arch>"
+arg "[args]..."
+'''
+
 run = '''
 #!/usr/bin/env bash
 set -eu
