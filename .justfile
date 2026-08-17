@@ -1,19 +1,3 @@
-set quiet
-
-[windows]
-set shell := ["powershell.exe", "-NoLogo", "-Command"]
-
-[unix]
-set shell := ["bash", "-c"]
-
-[windows]
-env:
-    $env:MISE_PWSH_CHPWD_WARNING=0; powershell.exe -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
-
-[unix]
-env:
-    bash --login -c 'eval "$(mise activate bash)"; exec bash'
-
 [windows]
 setup-gh:
     #!powershell
