@@ -42,7 +42,7 @@ run_windows = '''
 #!powershell.exe
 $ErrorActionPreference = "Stop"
 
-out = "build/${usage_os}_${usage_arch}"
+$out = "build/${usage_os}_${usage_arch}"
 
 if ($usage_os -eq "windows") {
     $out += ".exe"
