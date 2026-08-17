@@ -6,15 +6,5 @@
                 "arguments": ["exec", "--", "gopls"]
             }
         }
-    },
-    "terminal": {
-        "working_directory": "current_project_directory",
-        "env": {},
-        "shell": {
-            "with_arguments": {
-                "program": "mise",
-                "args": ["run", "activate"]
-            }
-        }
     }
 }
