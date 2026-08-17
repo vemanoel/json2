@@ -16,12 +16,8 @@ run_windows = '''
 #!powershell.exe
 $env:MISE_PWSH_CHPWD_WARNING=0
 powershell.exe -Command "
-    mise activate pwsh |
-        Out-String |
-        Invoke-Expression
-    powershell.exe `
-        -NoLogo `
-        -NoProfile
+    mise activate pwsh | Out-String | Invoke-Expression
+    powershell.exe -NoLogo -NoProfile
 "
 '''
 
@@ -48,7 +44,7 @@ if [ $usage_os = "windows" ]; then
 fi
 export GOOS=$usage_os
 export GOARCH=$usage_arch
-go build -o $out ${usage_args:-}
+go build -ldflags="-s -w" -o $out ${usage_args:-}
 '''
 
 run_windows = '''
@@ -60,7 +56,7 @@ if ($usage_os -eq "windows") {
 }
 $env:GOOS=$usage_os
 $env:GOARCH=$usage_arch
-go build -o $out $usage_args
+go build -ldflags="-s -w" -o $out $usage_args
 '''
 
 [tasks.crossbuild]
