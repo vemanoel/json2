@@ -7,8 +7,7 @@ run_windows = '''
 #!powershell.exe
 $env:MISE_PWSH_CHPWD_WARNING=0
 
-powershell.exe -Command `
-    "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
+powershell.exe -Command "mise activate pwsh | Out-String | Invoke-Expression; powershell.exe -NoLogo -NoProfile"
 '''
 
 [tasks.run]
@@ -52,11 +51,4 @@ $env:GOOS=$usage_os; $env:GOARCH=$usage_arch; go build -o $out $usage_args
 '''
 
 [tasks.crossbuild]
-depends = [
-    "build linux amd64",
-    "build linux 386",
-    "build darwin amd64",
-    "build darwin arm64",
-    "build windows amd64",
-    "build windows 386",
-]
+depends = ["build linux amd64", "build linux 386", "build darwin amd64", "build darwin arm64", "build windows amd64", "build windows 386"]
