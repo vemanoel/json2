@@ -2,8 +2,8 @@
 
 ### Prerequisites
 
-- [zed](https://zed.dev)
-- [mise](https://mise.jdx.dev)
+- [Zed](https://zed.dev)
+- [Mise](https://mise.jdx.dev)
 
 ### Environment setup
 
