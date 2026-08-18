@@ -14,9 +14,9 @@
 ### Daily Commands
 
 ```bash
-mise run [args]             # run the application
-mise run lint               # run static analysis
-mise run test               # run tests
-mise run crossbuild         # build for all platforms
-mise run build [os] [arch]  # build for a specific platform
+mise r [args]             # run the application
+mise r lint               # run static analysis
+mise r test               # run tests
+mise r crossbuild         # build for all platforms
+mise r build [os] [arch]  # build for a specific platform
 ```
