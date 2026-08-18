@@ -12,7 +12,7 @@ run = 'go run main.go'
 [tasks.test]
 run = 'go test -race -failfast -count 1 ./...'
 
-[tasks.lint]
+[tasks.vet]
 run = 'go vet ./...'
 
 [tasks.build]
