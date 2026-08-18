@@ -41,6 +41,7 @@ go build -ldflags "-s -w" -o $out
 
 [tasks.crossbuild]
 alias = "cb"
+
 depends = [
   "build linux amd64",
   "build linux 386",
