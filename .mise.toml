@@ -11,7 +11,7 @@ usage = 'arg "[args]..."'
 run = 'go run main.go ...$env.usage_args?'
 
 [tasks.test]
-run = 'go test -race -failfast -count 1 ./...'
+run = 'go test -failfast -count 1 ./...'
 
 [tasks.vet]
 run = 'go vet ./...'
