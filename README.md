@@ -7,9 +7,10 @@
 
 ### Environment setup
 
-1. Clone this repository and navigate to the project directory
-2. Run `mise trust`
-3. Run `mise install`
+1. Clone this repository
+2. Navigate to project directory
+3. Run `mise trust`
+4. Run `mise install`
 
 ### Daily Commands
 
