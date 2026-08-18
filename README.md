@@ -3,9 +3,7 @@
 ### Prerequisites
 
 - [zed](https://zed.dev)
-- [git](https://git-scm.com)
 - [mise](https://mise.jdx.dev)
-- [nushell](https://www.nushell.sh)
 
 ### Environment setup
 
