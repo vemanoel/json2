@@ -7,7 +7,7 @@
 
 ### Environment setup
 
-1. Go to to project directory
+1. Go to the project directory
 2. Run `mise trust`
 3. Run `mise install`
 
