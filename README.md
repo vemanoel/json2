@@ -5,6 +5,7 @@
 - [Zed](https://zed.dev)
 - [Git](https://git-scm.com)
 - [Mise](https://mise.jdx.dev)
+- [Nushell](https://www.nushell.sh)
 
 ### Environment setup
 
