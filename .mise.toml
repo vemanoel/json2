@@ -14,12 +14,16 @@ usage = 'arg "[args]..."'
 run = 'go run main.go ...$env.usage_args?'
 
 [tasks.test]
+alias = "t"
 run = 'go test -failfast -count 1 ./...'
 
 [tasks.vet]
+alias = "v"
 run = 'go vet ./...'
 
 [tasks.build]
+alias = "b"
+
 usage = '''
 arg "<os>"
 arg "<arch>"
@@ -36,6 +40,7 @@ go build -ldflags "-s -w" -o $out
 '''
 
 [tasks.crossbuild]
+alias = "cb"
 depends = [
   "build linux amd64",
   "build linux 386",
