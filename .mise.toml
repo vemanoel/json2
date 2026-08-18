@@ -8,7 +8,7 @@ shell = "nu -c"
 
 [tasks.default]
 usage = 'arg "[args]..."'
-run = 'go run main.go $env.usage_args'
+run = 'go run main.go ...$env.usage_args?'
 
 [tasks.test]
 run = 'go test -race -failfast -count 1 ./...'
