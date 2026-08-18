@@ -15,8 +15,8 @@
 
 ```bash
 mise run [args]             # run the application
-mise run lint               # check for issues
 mise run test               # run tests
+mise run vet                # run static analysis
 mise run crossbuild         # build for all platforms
 mise run build [os] [arch]  # build for a specific platform
 ```
