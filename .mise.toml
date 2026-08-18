@@ -1,10 +1,11 @@
 [tools]
+"aqua:nushell/nushell" = "0.115.0"
 gh = "2.97.0"
 go = "1.26.0"
 "go:golang.org/x/tools/gopls" = "0.23.0"
 
 [task_config]
-shell = "bash -c"
+shell = "nu -c"
 
 [tasks.default]
 run = 'go run main.go'
@@ -22,12 +23,12 @@ arg "<arch>"
 '''
 
 run = '''
-$out = $"build/($usage_os)_($usage_arch)"
-if $usage_os == "windows" {
+$env.GOOS = $env.usage_os
+$env.GOARCH = $env.usage_arch
+mut out = $"build/($env.GOOS)_($env.GOARCH)"
+if $env.GOOS == "windows" {
     $out += ".exe"
 }
-$env.GOOS = $usage_os
-$env.GOARCH = $usage_arch
 go build -ldflags "-s -w" -o $out
 '''
 
@@ -40,19 +41,3 @@ depends = [
   "build windows amd64",
   "build windows 386",
 ]
-
-[tasks.gitconfig]
-run = '''
-let email = (input -s "github account email: ")
-git config --local user.email $email
-let name = (input -s "name: ")
-git config --local user.name $name
-let token = (input -s "github access token: ")
-$token | gh auth login --with-token
-$helper = "!mise exec -- gh auth git-credential"
-git config --add credential.https://github.com.helper ''
-git config --add credential.https://github.com.helper $helper
-git config --add credential.https://gist.github.com.helper ''
-git config --add credential.https://gist.github.com.helper $helper
-gh auth status
-'''
