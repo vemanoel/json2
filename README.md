@@ -8,9 +8,15 @@
 ### Environment setup
 
 1. Clone this repository and navigate to the project directory
-2. Run `mise trust && mise install`
-3. Access https://github.com/settings/tokens/new
-4. Generate a token with these scopes: **repo**, **read:org**, **gist**
-5. Copy the generated token to clipboard
-6. Run `mise run gitconfig`
-7. Enter your GitHub account email, your name and paste the token
+2. Run `mise trust`
+3. Run `mise install`
+
+### Daily Commands
+
+```bash
+mise run [args]             # run the application
+mise run lint               # run static analysis
+mise run test               # run tests
+mise run crossbuild         # build for all platforms
+mise run build [os] [arch]  # build for a specific platform
+```
