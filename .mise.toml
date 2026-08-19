@@ -10,6 +10,11 @@ quiet = true
 shell = "nu -c"
 
 [tasks.default]
+hide = true
+usage = 'arg "[args]..."'
+run = 'mise run exec ...$env.usage_args?'
+
+[tasks.exec]
 description = "run the application"
 usage = 'arg "[args]..."'
 run = 'go run main.go -- ...$env.usage_args?'
@@ -28,12 +33,8 @@ run = 'go fmt ./...'
 
 [tasks.fmt]
 description = "format specific files"
-
-usage = '''
-arg "[files]..." help="Files to format (e.g. a.go b.go)"
-'''
-
-run = 'go fmt -w ...$env.usage_files'
+usage = 'arg "[paths]..." help="space-separated"'
+run = 'go fmt -w ...$env.usage_paths'
 
 [tasks.test]
 description = "run tests"
