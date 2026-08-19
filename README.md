@@ -10,7 +10,6 @@
 1. Go to the project directory
 2. Run `mise trust`
 3. Run `mise install`
-4. Run `mise tasks ls`
 
 ### Daily Commands
 
