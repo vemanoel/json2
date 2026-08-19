@@ -29,7 +29,9 @@ jobs:
         run: mise run crossbuild
 
       - name: create release
-        run: gh release create v${{ inputs.version }} build/* --title v${{ inputs.version }} --generate-notes
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v3.0.2
+        with:
+          files: build/*
+          generate_release_notes: true
+          tag_name: v${{ inputs.version }}
   
