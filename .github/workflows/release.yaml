@@ -23,13 +23,13 @@ jobs:
           fetch-tags: true
 
       - name: set up mise
-        uses: jdx/mise-action@v4.2.0
+        uses: jdx/mise-action@v4.0.0
   
       - name: build artifacts
         run: mise run crossbuild
 
       - name: create release
-        uses: softprops/action-gh-release@v3.0.2
+        uses: softprops/action-gh-release@v3.0.0
         with:
           files: build/*
           generate_release_notes: true
