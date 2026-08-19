@@ -10,24 +10,24 @@ quiet = true
 shell = "nu -c"
 
 [tasks.default]
-description = "Run the application"
+description = "run the application"
 usage = 'arg "[args]..."'
 run = 'go run main.go -- ...$env.usage_args?'
 
 [tasks.vet]
-description = "Run static analysis"
+description = "run static analysis"
 run = 'go vet ./...'
 
 [tasks.fmtcheck]
-description = "Check code formatting"
+description = "check code formatting"
 run = 'gofmt -l .'
 
 [tasks.fmtall]
-description = "Format all packages"
+description = "format all files"
 run = 'go fmt ./...'
 
 [tasks.fmt]
-description = "Format specific files"
+description = "format specific files"
 
 usage = '''
 arg "[files]..." help="Files to format (e.g. a.go b.go)"
@@ -36,15 +36,15 @@ arg "[files]..." help="Files to format (e.g. a.go b.go)"
 run = 'go fmt -w ...$env.usage_files'
 
 [tasks.test]
-description = "Run tests"
+description = "run tests"
 run = 'go test -failfast -count 1 ./...'
 
 [tasks.build]
-description = "Build for a specific platform"
+description = "build for a specific platform"
 
 usage = '''
-arg <os> help="Target operating system"
-arg <arch> help="Target architecture"
+arg <os> help="target operating system"
+arg <arch> help="target architecture"
 '''
 
 run = '''
@@ -58,7 +58,7 @@ go build -ldflags "-s -w" -o $out
 '''
 
 [tasks.crossbuild]
-description = "Build for all supported platforms"
+description = "build for all supported platforms"
 
 depends = [
   "build linux amd64",
