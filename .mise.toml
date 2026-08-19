@@ -9,11 +9,6 @@ quiet = true
 [task_config]
 shell = "nu -c"
 
-[tasks.default]
-hide = true
-usage = 'arg "[args]..."'
-run = 'mise run exec ...$env.usage_args?'
-
 [tasks.exec]
 description = "run the application"
 usage = 'arg "[args]..."'
