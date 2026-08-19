@@ -11,8 +11,8 @@ shell = "nu -c"
 
 [tasks.exec]
 description = "run the application"
-usage = 'arg "[args]..."'
-run = 'go run main.go -- ...$env.usage_args?'
+usage = 'arg "[args]..." default=""'
+run = 'go run main.go -- $env.usage_args'
 
 [tasks.vet]
 description = "run static analysis"
@@ -22,14 +22,9 @@ run = 'go vet ./...'
 description = "check code formatting"
 run = 'gofmt -l .'
 
-[tasks.fmtall]
+[tasks.fmt]
 description = "format all files"
 run = 'go fmt ./...'
-
-[tasks.fmt]
-description = "format specific files"
-usage = 'arg "[paths]..." help="space-separated"'
-run = 'go fmt -w ...$env.usage_paths'
 
 [tasks.test]
 description = "run tests"
