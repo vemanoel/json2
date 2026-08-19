@@ -11,7 +11,11 @@ shell = "nu -c"
 
 [tasks.default]
 description = "Run the application"
-usage = 'arg "[args]..."'
+
+usage = '''
+arg "[args]..." help="Arguments for go run"
+'''
+
 run = 'go run main.go ...$env.usage_args?'
 
 [tasks.vet]
@@ -28,7 +32,11 @@ run = 'go fmt ./...'
 
 [tasks.fmt]
 description = "Format specific files"
-usage = 'arg "[files]..."'
+
+usage = '''
+arg "[files]..." help="Files to format (e.g. a.go b.go)"
+'''
+
 run = 'go fmt -w ...$env.usage_files'
 
 [tasks.test]
