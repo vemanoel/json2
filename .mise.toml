@@ -13,9 +13,6 @@ shell = "nu -c"
 usage = 'arg "[args]..."'
 run = 'go run main.go ...$env.usage_args?'
 
-[tasks.test]
-run = 'go test -failfast -count 1 ./...'
-
 [tasks.vet]
 run = 'go vet ./...'
 
@@ -28,6 +25,9 @@ run = 'go fmt ./...'
 [tasks.fmt]
 usage = 'arg "[files]..."'
 run = 'go fmt -w ...$env.usage_files'
+
+[tasks.test]
+run = 'go test -failfast -count 1 ./...'
 
 [tasks.build]
 usage = '''
