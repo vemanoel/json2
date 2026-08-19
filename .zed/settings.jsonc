@@ -3,15 +3,15 @@
         "shell": {
             "with_arguments": {
                 "program": "mise",
-                "args": ["exec", "--", "nu"]
-            }
-        }
+                "args": ["exec", "--", "nu"],
+            },
+        },
     },
     "lsp": {
         "gopls": {
             "binary": {
                 "path": "mise",
-                "arguments": ["exec", "--", "gopls"]
+                "arguments": ["exec", "--", "gopls"],
             },
             "initialization_options": {
                 "staticcheck": true,
@@ -26,9 +26,9 @@
                     "unusedparams": true,
                     "unusedwrite": true,
                     "unusedvariable": true,
-                    "slicesdelete": true
-                }
-            }
-        }
-    }
+                    "slicesdelete": true,
+                },
+            },
+        },
+    },
 }
