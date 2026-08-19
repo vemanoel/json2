@@ -7,7 +7,6 @@
                 "arguments": ["exec", "--", "gopls"]
             },
             "initialization_options": {
-                "usePlaceholders": false,
                 "staticcheck": true,
                 "semanticTokens": true,
                 "analyses": {
