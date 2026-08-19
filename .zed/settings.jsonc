@@ -1,5 +1,12 @@
 {
-    "semantic_tokens": "combined",
+    "terminal": {
+        "shell": {
+            "with_arguments": {
+                "program": "mise",
+                "args": ["exec", "--", "nu"]
+            }
+        }
+    },
     "lsp": {
         "gopls": {
             "binary": {
