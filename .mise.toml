@@ -19,15 +19,15 @@ run = 'go test -failfast -count 1 ./...'
 [tasks.vet]
 run = 'go vet ./...'
 
-[tasks.fmt]
-usage = 'arg "[files]..."'
-run = 'go fmt -w ...$env.usage_files'
+[tasks.fmtcheck]
+run = 'gofmt -l .'
 
 [tasks.fmtall]
 run = 'go fmt ./...'
 
-[tasks.fmtcheck]
-run = 'gofmt -l .'
+[tasks.fmt]
+usage = 'arg "[files]..."'
+run = 'go fmt -w ...$env.usage_files'
 
 [tasks.build]
 usage = '''
