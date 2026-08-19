@@ -14,6 +14,7 @@
 ### Daily Commands
 
 ```bash
-mise tasks ls    # List available tasks
-mise run [task]  # Run a task
+mise tasks ls            # List available tasks
+mise run [task]          # Run a task
+mise run [task] --help   # Show task help
 ```
