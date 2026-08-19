@@ -11,12 +11,8 @@ shell = "nu -c"
 
 [tasks.default]
 description = "Run the application"
-
-usage = '''
-arg "[args]..." help="Arguments for go run"
-'''
-
-run = 'go run main.go ...$env.usage_args?'
+usage = 'arg "[args]..."'
+run = 'go run main.go -- ...$env.usage_args?'
 
 [tasks.vet]
 description = "Run static analysis"
