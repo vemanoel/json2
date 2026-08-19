@@ -39,8 +39,8 @@ run = 'go test -failfast -count 1 ./...'
 description = "Build for a specific platform"
 
 usage = '''
-arg "<os>"
-arg "<arch>"
+arg <os> help="Target operating system"
+arg <arch> help="Target architecture"
 '''
 
 run = '''
