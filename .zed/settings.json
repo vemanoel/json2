@@ -35,6 +35,9 @@
   "languages": {
     "Go": {
       "format_on_save": "on"
+    },
+    "JSONC": {
+      "format_on_save": "off"
     }
   }
 }
